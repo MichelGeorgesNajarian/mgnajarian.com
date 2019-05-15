@@ -2,6 +2,20 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+.notClicked {
+    background-color: #0d7fd0;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    border-radius: 1em 1em;
+}
+
+.clicked {
+    background-color: #848484;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    border-radius: 1em 1em;
+}
+
 #loading {
     width: 100%;
     height: 100%;
@@ -36,25 +50,37 @@ body {
 
 #nav {
     background-color: #0d7fd0;
-    height: 1.3em;
+/*    text-align: center;*/
+    min-height: 1.3em;
     display: block;
     border-bottom-left-radius: 1em 1em;
     border-bottom-right-radius: 1em 1em;
-    
+    padding-bottom: 0.5em;
+    top: 0;
+    margin-bottom: 3em;
 }
 
 #nav:hover {
     background-color: #23A4FF;
-    height: 3em;
+/*    min-height: 3em;*/
+}
+
+#nav:hover .notClicked {
+    background-color: #23A4FF;
 }
 
 #nav .items a {
     display: inline-block;
     text-align: center;
+    vertical-align: middle;
     width: 15%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 1%;
+    margin-top: 0.5%;
+}
+
+#nav .shown {
+    vertical-align: middle;
 }
 
 .hidden {
@@ -83,6 +109,10 @@ body {
 
 .items a:hover {
     color: #6F6F6F;
+}
+
+#nav .items .clicked:hover {
+    color: #EAEAEA;
 }
 
 .downArrow {
