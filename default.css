@@ -124,3 +124,12 @@ body {
     border-right: 8.66px solid transparent;  
     border-top: 10px solid #EAEAEA;
 }
+
+#container {
+    height: 100%;
+    background-color: #ffffffcc;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding-top: 2em;
+}
+}
