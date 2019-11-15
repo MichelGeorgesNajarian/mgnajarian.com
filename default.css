@@ -126,13 +126,7 @@ body {
   display: none;
 }
 
-@media all and (max-width: 800px) {
-  #nav {
-    justify-content: space-around;
-  }
-}
-
-@media all and (max-width: 600px) {
+@media all and (max-width: 991.98px) {
   #nav {
     -webkit-flex-flow: column wrap;
     flex-flow: column wrap;
