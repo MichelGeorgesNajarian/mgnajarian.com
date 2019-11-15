@@ -1,37 +1,7 @@
-document.getElementById("temp").addEventListener("click", function () {
-    var nav = document.getElementById("nav");
-    if (nav.style.display == "block") {
-        nav.style.display = "none";
-    } else {
-        nav.style.display = "block";
-    }
-});
-
-
 window.addEventListener("load", function () {
     document.getElementById("ready").style.display = "block";
     document.getElementById("loading").style.display = "none";
 });
-
-//document.getElementById("nav").addEventListener('mouseenter',showHide);
-//document.getElementById("nav").addEventListener('mouseout',showHide);
-//
-//function showHide() {
-//    var allDivs = document.getElementsByClassName("items");
-//    for (var i = 0; i < allDivs.length; i++) {
-//        var isShown = allDivs[i].classList[1];
-//        switch (isShown) {
-//            case "hidden":
-//                allDivs[i].classList.remove("hidden");
-//                allDivs[i].classList.add("shown");
-//                break;
-//            case "shown":
-//                allDivs[i].classList.remove("shown");
-//                allDivs[i].classList.add("hidden");
-//                break;
-//        }
-//    }
-//}
 
 var menuAttributes = document.querySelectorAll("ul#nav li a.menu-option");
 for (var i = 0; i < menuAttributes.length; i++) {
@@ -46,5 +16,23 @@ function clickedMenu(evt) {
     }
     evt.target.classList.remove("notClicked");
     evt.target.classList.add("clicked");
-    document.getElementById("nav").style.display = "none";
+    var btn = document.getElementById("buttonContainer");
+    if (window.getComputedStyle(btn).display == "block") {
+        toggleMenu(btn);
+    }
+    //document.getElementById("nav").style.display = "none";
+}
+
+function toggleMenu(x) {
+    x.classList.toggle("change");
+    var nav = document.getElementById("nav");
+    if (nav.style.display == "block") {
+        nav.style.display = "none";
+        document.getElementById("buttonContainer").title = "Open Menu";
+        document.getElementById("ready").style.backgroundColor = "#EAEAEA";
+    } else {
+        nav.style.display = "block";
+        document.getElementById("buttonContainer").title = "Close Menu";
+        document.getElementById("ready").style.backgroundColor = "#00000038";
+    }
 }

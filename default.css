@@ -62,6 +62,10 @@ body {
     padding-left: 30px;
     padding-right: 30px;
     right: 0;
+    transition: background-color 1s ease-out;
+    transition-delay: 0s;
+    -webkit-transition: background-color 1s ease-out;
+    -webkit-transition-delay: 0s;
 }
 
 #nav {
@@ -97,8 +101,41 @@ body {
   color: #EAEAEA;
 }
 
-#temp {
-    display: none;
+/*hamburger menu CSS*/
+#buttonContainer {
+  cursor: pointer;
+  float: right;
+  padding-top: 0.5em;
+  display: none;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #6F6F6F;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.bar4 {
+  width: 35px;
+  height: 5px;
+  background-color: #6F6F6F;
+  margin: 6px 0;
+  transition: 0.4s;
+  position: absolute;
+  display: none;
+}
+
+.change .bar2 {
+  -webkit-transform: rotate(-90deg) translate(px, -10px);
+  transform: rotate(-90deg) translate(0px, -10px);
+}
+
+.change .bar4 {
+  display: inline-block;
+  -webkit-transform: rotate(90deg) translate(-17px, -10px);
+  transform: rotate(90deg) translate(-17px, 7px);
 }
 
 .shown {
@@ -126,6 +163,10 @@ body {
   display: none;
 }
 
+#container {
+  padding: 3em 5em 2em 4em;
+}
+
 @media all and (max-width: 991.98px) {
   #nav {
     -webkit-flex-flow: column wrap;
@@ -133,8 +174,10 @@ body {
     padding: 0;
     display: none;
   }
-  #temp {
+  #buttonContainer {
       display: block;
+      background-color: #EAEAEA;
+      padding: 0.1em;
   }
 
   #nav a {
