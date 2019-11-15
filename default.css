@@ -153,6 +153,10 @@ body {
   #nav li:last-of-type a {
     border-bottom: none;
   }
+
+  .shown {
+    display: none;
+  }
 }
 
 .downArrow {
