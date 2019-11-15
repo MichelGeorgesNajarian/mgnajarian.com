@@ -33,15 +33,6 @@ window.addEventListener("load", function () {
 //    }
 //}
 
-function displayNav() {
-    var nav = document.getElementById("nav");
-    nav.style.display = "display: -webkit-box";
-    nav.style.display = "-moz - box";
-    nav.style.display = "-ms - flexbox";
-    nav.style.display = "-webkit - flex";
-    nav.style.display = "flex";
-}
-
 var menuAttributes = document.querySelectorAll("ul#nav li a.menu-option");
 for (var i = 0; i < menuAttributes.length; i++) {
     menuAttributes[i].addEventListener('click', clickedMenu);
@@ -55,4 +46,5 @@ function clickedMenu(evt) {
     }
     evt.target.classList.remove("notClicked");
     evt.target.classList.add("clicked");
+    document.getElementById("nav").style.display = "none";
 }
