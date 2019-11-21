@@ -55,7 +55,7 @@ function clickedMenu(evt) {
     //document.getElementById("nav").style.display = "none";
 }
 
-function toggleMenu(x) {
+const toggleMenu = async (x) => {
     x.classList.toggle("change");
     var nav = document.getElementById("nav");
     if (nav.style.top == "0em") {
@@ -63,10 +63,13 @@ function toggleMenu(x) {
         nav.style.top = "-30em";
         document.getElementById("buttonContainer").title = "Open Menu";
         document.getElementById("ready").style.backgroundColor = "#EAEAEA";
+        await delay(300);
+        document.getElementById("navWrapper").style.height = "0px";
     } else {
         nav.style.animation = "slide-in 0.8s";
         nav.style.top = "0em";
         document.getElementById("buttonContainer").title = "Close Menu";
         document.getElementById("ready").style.backgroundColor = "#00000038";
+        document.getElementById("navWrapper").style.height = "auto";
     }
 }
