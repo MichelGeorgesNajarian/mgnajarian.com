@@ -306,9 +306,19 @@ body::before {
       margin: 0em 0em 1em 0em;
     }
 
+    #scrollTop {
+      width: 5em;
+      height: 5em;
+    }
+
     #scrollTop:hover {
     cursor: pointer;
     background-color: #00375a;
+  }
+
+  #scrollTop::after {
+    font-size: 4em;
+    line-height: 1em;
   }
     /* #navWrapper:hover .hidden {
       display: flex;
