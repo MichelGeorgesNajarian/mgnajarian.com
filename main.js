@@ -58,12 +58,14 @@ function clickedMenu(evt) {
 function toggleMenu(x) {
     x.classList.toggle("change");
     var nav = document.getElementById("nav");
-    if (nav.style.display == "block") {
-        nav.style.display = "none";
+    if (nav.style.top == "0em") {
+        nav.style.animation = "slide-out 0.6s";
+        nav.style.top = "-30em";
         document.getElementById("buttonContainer").title = "Open Menu";
         document.getElementById("ready").style.backgroundColor = "#EAEAEA";
     } else {
-        nav.style.display = "block";
+        nav.style.animation = "slide-in 0.8s";
+        nav.style.top = "0em";
         document.getElementById("buttonContainer").title = "Close Menu";
         document.getElementById("ready").style.backgroundColor = "#00000038";
     }

@@ -265,8 +265,18 @@ body::before {
       -o-flex-flow: column wrap;
       -ms-flex-flow: column wrap;
       padding: 0;
-      display: none;
+      display: block;
+      top: -30em;
     }
+
+    #navWrapper:hover .hidden {
+      display: block;
+    }
+
+    #navWrapper:not(:hover) .hidden {
+      display: block;
+    }
+
     #buttonContainer {
         display: block;
         background-color: #EAEAEA;
@@ -388,7 +398,7 @@ body::before {
 
   @keyframes slide-in {
     from {
-      top: -5em;
+      top: -30em;
     }
     to {
       top: 0;
@@ -400,6 +410,6 @@ body::before {
       top: 0;
     }
     to {
-      top: -5em;
+      top: -30em;
     }
   }
