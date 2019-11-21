@@ -278,8 +278,6 @@ body::before {
     #nav a {
       text-align: center;
       padding: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     #nav li:last-of-type a {
@@ -290,6 +288,13 @@ body::before {
       display: none !important;
     }
 
+    #navWrapper {
+      font-size: xx-large;
+    }
+    li {
+      margin: 0em 0em 1em 0em;
+    }
+
     #navWrapper:hover .hidden {
       animation: none;
     }
@@ -297,6 +302,14 @@ body::before {
       animation: none;
     }
 
+    li {
+      margin: 0em 0em 1em 0em;
+    }
+
+    #scrollTop:hover {
+    cursor: pointer;
+    background-color: #00375a;
+  }
     /* #navWrapper:hover .hidden {
       display: flex;
       animation: slide-in 0.5s;
