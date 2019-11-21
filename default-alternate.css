@@ -8,11 +8,13 @@ body::before {
     box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
     z-index: 69420;
   }
-  
+
   body {
       font-family: Verdana, Arial, Helvetica, sans-serif;
+      margin: 0px;
+      width: 100%;
   }
-  
+
   .notClicked {
     background-color: inherit;
     color: #EAEAEA;
@@ -20,18 +22,18 @@ body::before {
     padding-bottom: 0.3em;
     border-radius: 1em 1em;
   }
-  
+
   .notClicked:hover {
     color:#6F6F6F !important;
   }
-  
+
   .clicked {
     background-color: #848484;
     padding-top: 0.3em;
     padding-bottom: 0.3em;
     border-radius: 1em 1em;
   }
-  
+
   #loading {
       width: 100%;
       height: 100%;
@@ -50,12 +52,11 @@ body::before {
       float: right;
       vertical-align: middle;
   }
-  
+
   #ready {
       display: none;
       background-color: #EAEAEA;
       height: 100%;
-      position: fixed;
       left: 0;
       top: 0;
       text-align: center;
@@ -73,7 +74,7 @@ body::before {
       -ms-transition: background-color 1s ease-out;
       -ms-transition-delay: 0s;
   }
-  
+
   #nav {
     list-style: none;
     margin: 0;
@@ -95,22 +96,22 @@ body::before {
     border-bottom-right-radius: 1em 1em;
     position: relative;
   }
-  
+
   #nav a {
       color: #EAEAEA;
       text-decoration: none;
       display: block;
       padding: 0.5em 2.5em 0.5em 2.5em;
   }
-  
+
   .items:hover {
     background: #0d7fd0 !important;
   }
-  
+
   #nav .items .clicked:hover {
     color: #EAEAEA;
   }
-  
+
   /*hamburger menu CSS*/
   #buttonContainer {
     cursor: pointer;
@@ -118,7 +119,7 @@ body::before {
     padding-top: 0.5em;
     display: none;
   }
-  
+
   .bar1, .bar2, .bar3 {
     width: 35px;
     height: 5px;
@@ -126,7 +127,7 @@ body::before {
     margin: 6px 0;
     transition: 0.4s;
   }
-  
+
   .bar4 {
     width: 35px;
     height: 5px;
@@ -136,7 +137,7 @@ body::before {
     position: absolute;
     display: none;
   }
-  
+
   .change .bar2 {
     -webkit-transform: rotate(-90deg) translate(px, -10px);
     transform: rotate(-90deg) translate(0px, -10px);
@@ -144,7 +145,7 @@ body::before {
     -o-transform: rotate(-90deg) translate(0px, -10px);
     -ms-transform: rotate(-90deg) translate(0px, -10px);
   }
-  
+
   .change .bar4 {
     display: inline-block;
     -webkit-transform: rotate(90deg) translate(-17px, -10px);
@@ -153,7 +154,7 @@ body::before {
     -o-transform: rotate(90deg) translate(-17px, 7px);
     -ms-transform: rotate(90deg) translate(-17px, 7px);
   }
-  
+
   .shown {
     border-bottom-left-radius: 1em 1em;
     border-bottom-right-radius: 1em 1em;
@@ -167,7 +168,7 @@ body::before {
     font-weight: bold;
     font-size: large;
   }
-  
+
   #navWrapper:hover .hidden {
     display: -webkit-box;
     display: -moz - box;
@@ -178,9 +179,9 @@ body::before {
     -webkit-animation: fade-in 0.5s;
     -moz-animation: fade-in 0.5s;
     -o-animation: fade-in 0.5s;
-    -ms-animation: fade-in 0.5s;    
+    -ms-animation: fade-in 0.5s;
   }
-  
+
   #navWrapper:hover .shown {
     display: none;
     animation: fade-out 0.5;
@@ -189,7 +190,7 @@ body::before {
     -o-animation: fade-out 0.5;
     -ms-animation: fade-out 0.5;
   }
-  
+
   #navWrapper:not(:hover) .hidden {
     display: none;
     animation: fade-out 0.5;
@@ -198,7 +199,7 @@ body::before {
     -o-animation: fade-out 0.5;
     -ms-animation: fade-out 0.5;
   }
-  
+
   #navWrapper:not(:hover) .shown {
     display: block;
     animation: fade-in 0.5s;
@@ -207,15 +208,55 @@ body::before {
     -o-animation: fade-in 0.5s;
     -ms-animation: fade-in 0.5s;
   }
-  
+
   .downArrow:hover {
     display: none;
   }
-  
+
+  #scrollTop {
+    display: inline-block;
+  background-color: #00375a;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 69420;
+  transition: opacity 0.5s, visibility 0.5s;
+  -webkit-transition: opacity 0.5s, visibility 0.5s;
+  -moz-transition: opacity 0.5s, visibility 0.5s;
+  -o-transition: opacity 0.5s, visibility 0.5s;
+  }
+
+  #scrollTop::after {
+  content: "\25b2";
+  font-size: 2em;
+  line-height: 43px;
+  color: #EAEAEA;
+  }
+
+  #scrollTop:active {
+    background-color: #555;
+  }
+
+  #scrollTop:hover {
+    cursor: pointer;
+    background-color: #0d7fd0;
+  }
+
+  #scrollTop.showBtn {
+    opacity: 1;
+    visibility: visible;
+  }
+
   #container {
     padding: 0em 5em 2em 4em;
   }
-  
+
   @media all and (max-width: 991.98px) {
     #nav {
       -webkit-flex-flow: column wrap;
@@ -233,29 +274,29 @@ body::before {
         position: relative;
         z-index: 1337;
     }
-  
+
     #nav a {
       text-align: center;
       padding: 10px;
       border-top: 1px solid rgba(255, 255, 255, 0.3);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
-  
+
     #nav li:last-of-type a {
       border-bottom: none;
     }
-  
+
     .shown {
       display: none !important;
     }
-  
+
     #navWrapper:hover .hidden {
       animation: none;
     }
     #navWrapper:not(:hover) .hidden {
       animation: none;
     }
-  
+
     /* #navWrapper:hover .hidden {
       display: flex;
       animation: slide-in 0.5s;
@@ -266,7 +307,7 @@ body::before {
       top: -20em;
     } */
   }
-  
+
   .downArrow {
       margin-left: 1em;
       display: inline-block;
@@ -276,7 +317,7 @@ body::before {
       border-right: 5px solid transparent;
       border-top: 10px solid #EAEAEA;
   }
-  
+
   @keyframes fade-in {
     from {
         opacity: 0;
@@ -284,8 +325,8 @@ body::before {
     to {
         opacity: 1;
     }
-  } 
-  
+  }
+
   @keyframes fade-out {
     from {
         opacity: 1;
@@ -294,7 +335,7 @@ body::before {
         opacity: 0;
     }
   }
-  
+
   @keyframes slide-in {
     from {
       top: -5em;
@@ -303,7 +344,7 @@ body::before {
       top: 0;
     }
   }
-  
+
   @keyframes slide-out {
     from {
       top: 0;

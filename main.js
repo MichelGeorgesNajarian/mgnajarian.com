@@ -1,7 +1,34 @@
+//remove loading gif and display page once everything has loaded
 window.addEventListener("load", function () {
     document.getElementById("ready").style.display = "block";
     document.getElementById("loading").style.display = "none";
 });
+
+//display or hide scroll to top btn
+var scroll = document.getElementById("scrollTop");
+
+window.onscroll = function () {
+    if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        this.scroll.classList.add("showBtn");
+    } else {
+        this.scroll.classList.remove("showBtn");
+    }
+};
+const delay = ms => new Promise(res => setTimeout(res, ms));
+const toTop = async () => {
+    while (document.documentElement.scrollTop || document.body.scrollTop) {
+        if (!document.documentElement.scrollTop && document.body.scrollTop) {
+            document.body.scrollTop = document.body.scrollTop - document.body.scrollTop / 10;
+        } else if (document.documentElement.scrollTop && !document.body.scrollTop) {
+            document.documentElement.scrollTop = document.documentElement.scrollTop - document.documentElement.scrollTop / 10;
+        } else {
+            document.body.scrollTop = document.body.scrollTop - document.body.scrollTop / 10;
+            document.documentElement.scrollTop = document.documentElement.scrollTop - document.documentElement.scrollTop / 10;
+        }
+        await delay(2);
+    }
+}
+scroll.addEventListener('click', toTop);
 
 var menuAttributes = document.querySelectorAll("ul#nav li a.menu-option");
 for (var i = 0; i < menuAttributes.length; i++) {
