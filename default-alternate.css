@@ -24,7 +24,7 @@ body::before {
   }
 
   .notClicked:hover {
-    color:#6F6F6F !important;
+    color:#565656 !important;
   }
 
   .clicked {
@@ -329,6 +329,33 @@ body::before {
       animation: slide-out 20s;
       top: -20em;
     } */
+
+    .bar1, .bar2, .bar3 {
+    width: 5em;
+    height: 1em;
+    margin: 1em 0;
+  }
+
+  .bar4 {
+    width: 5em;
+    height: 1em;
+    margin: 1em 0;
+  }
+  .change .bar2 {
+          transform: rotate(-90deg) translate(0em, -2em);
+          -moz-transform: rotate(-90deg) translate(0em, -2em);
+          -webkit-transform: rotate(-90deg) translate(0em, -2em);
+          -ms-transform: rotate(-90deg) translate(0em, -2em);
+          -o-transform: rotate(-90deg) translate(0em, -2em);
+    }
+
+    .change .bar4 {
+      transform: rotate(90deg) translate(-3em, 0.5em);
+      -moz-transform: rotate(90deg) translate(-3em, 0.5em);
+      -webkit-transform: rotate(90deg) translate(-3em, 0.5em);
+      -ms-transform: rotate(90deg) translate(-3em, 0.5em);
+      -o-transform: rotate(90deg) translate(-3em, 0.5em);
+    }
   }
 
   .downArrow {
