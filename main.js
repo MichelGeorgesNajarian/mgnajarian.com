@@ -8,6 +8,10 @@ for (var i = 0; i < menuAttributes.length; i++) {
     menuAttributes[i].addEventListener('click', clickedMenu);
 }
 
+if (window.getComputedStyle(document.getElementById("buttonContainer")).display == "block") { // true if hamburger menu is the one active and not the dropdown menu
+    document.querySelector("#nav").querySelectorAll("li > a")[0].style = "padding-left: 35px;"; // adding padding to the first element which is pushed off-center due to the menu icon
+}
+
 function clickedMenu(evt) {
     var allAttr = document.querySelectorAll("ul#nav li a.menu-option");
     for (var i = 0; i < allAttr.length; i++) {
