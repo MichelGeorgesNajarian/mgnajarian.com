@@ -164,16 +164,15 @@
     width: 5em;
     height: 1em;
     margin: 1em 0;
-    transform: rotate(-45deg) translate(2.5em, -2.12em);
     transition: 0.4s;
   }
 
   .change .bar5 {
-    transform: rotate(-45deg) translate(2.5em, -2.12em);
+    transform: rotate(-45deg) translate(2em, -2.12em);
   }
 
 .change .bar6 {
-  transform: rotate(45deg) translate(-2.5em, -2.12em);
+  transform: rotate(45deg) translate(-2em, -2.12em);
 }
 
   .shown {
@@ -386,7 +385,7 @@
   .bar3 {
     margin-bottom: 0px;
   }
-  
+
   .change .bar2 {
           transform: rotate(-90deg) translate(0em, -2em);
           -moz-transform: rotate(-90deg) translate(0em, -2em);
