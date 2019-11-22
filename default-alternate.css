@@ -1,4 +1,4 @@
-body::before {
+  body::before {
     content: "";
     position: absolute;
     top: -10px;
@@ -120,7 +120,7 @@ body::before {
     display: none;
   }
 
-  .bar1, .bar2, .bar3 {
+  .bar1, .bar2, .bar3, .bar5, .bar6 {
     width: 35px;
     height: 5px;
     background-color: #6F6F6F;
@@ -135,7 +135,11 @@ body::before {
     margin: 6px 0;
     transition: 0.4s;
     position: absolute;
-    display: none;
+    display: inline-block;
+  }
+
+  .bar5, .bar6 {
+    position: absolute;
   }
 
   .change .bar2 {
@@ -147,13 +151,30 @@ body::before {
   }
 
   .change .bar4 {
-    display: inline-block;
+    /*! display: inline-block; */
     -webkit-transform: rotate(90deg) translate(-17px, -10px);
     transform: rotate(90deg) translate(-17px, 7px);
     -moz-transform: rotate(90deg) translate(-17px, 7px);
     -o-transform: rotate(90deg) translate(-17px, 7px);
     -ms-transform: rotate(90deg) translate(-17px, 7px);
   }
+
+  .change .bar5, .change .bar6 {
+    display: block;
+    width: 5em;
+    height: 1em;
+    margin: 1em 0;
+    transform: rotate(-45deg) translate(2.5em, -2.12em);
+    transition: 0.4s;
+  }
+
+  .change .bar5 {
+    transform: rotate(-45deg) translate(2.5em, -2.12em);
+  }
+
+.change .bar6 {
+  transform: rotate(45deg) translate(-2.5em, -2.12em);
+}
 
   .shown {
     border-bottom-left-radius: 1em 1em;
@@ -215,28 +236,37 @@ body::before {
 
   #scrollTop {
     display: inline-block;
-  background-color: #00375a;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 50px;
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 69420;
-  transition: opacity 0.5s, visibility 0.5s;
-  -webkit-transition: opacity 0.5s, visibility 0.5s;
-  -moz-transition: opacity 0.5s, visibility 0.5s;
-  -o-transition: opacity 0.5s, visibility 0.5s;
+    background-color: #00375a;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 69420;
+    transition: opacity 0.5s, visibility 0.5s;
+    -webkit-transition: opacity 0.5s, visibility 0.5s;
+    -moz-transition: opacity 0.5s, visibility 0.5s;
+    -o-transition: opacity 0.5s, visibility 0.5s;
   }
 
   #scrollTop::after {
-  content: "\25b2";
-  font-size: 2em;
-  line-height: 43px;
-  color: #EAEAEA;
+    border-style: solid;
+	  border-width: 0.4em 0.4em 0 0;
+	  content: '';
+    font-size: 1.5em;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg);
+    display: inline-block;
+    position: relative;
+    top: 15px;
+    line-height: 43px;
+    color: #EAEAEA;
+    border-radius: 1px;
   }
 
   #scrollTop:active {
@@ -323,14 +353,17 @@ body::before {
     }
 
     #scrollTop:hover {
-    cursor: pointer;
-    background-color: #00375a;
-  }
+		cursor: pointer;
+		background-color: #00375a;
+	}
 
-  #scrollTop::after {
-    font-size: 4em;
-    line-height: 1em;
-  }
+	#scrollTop::after {
+		border-width: 0.6em 0.6em 0 0;
+		top: 25px !important;
+		height: 35px;
+		width: 35px;
+	}
+
     /* #navWrapper:hover .hidden {
       display: flex;
       animation: slide-in 0.5s;
@@ -346,12 +379,14 @@ body::before {
     height: 1em;
     margin: 1em 0;
   }
-
-  .bar4 {
-    width: 5em;
-    height: 1em;
-    margin: 1em 0;
+  .bar1 {
+    margin-top: 5px;
   }
+
+  .bar3 {
+    margin-bottom: 0px;
+  }
+  
   .change .bar2 {
           transform: rotate(-90deg) translate(0em, -2em);
           -moz-transform: rotate(-90deg) translate(0em, -2em);
@@ -366,7 +401,27 @@ body::before {
       -webkit-transform: rotate(90deg) translate(-3em, 0.5em);
       -ms-transform: rotate(90deg) translate(-3em, 0.5em);
       -o-transform: rotate(90deg) translate(-3em, 0.5em);
+      width: 5em;
+      height: 1em;
+      margin: 1em 0;
     }
+
+    .change .bar5 {
+      transform: rotate(-45deg) translate(2.5em, -2.12em);
+	    -moz-transform: rotate(-45deg) translate(2.5em, -2.12em);
+    	-webkit-transform: rotate(-45deg) translate(2.5em, -2.12em);
+	    -ms-transform: rotate(-45deg) translate(2.5em, -2.12em);
+    	-o-transform: rotate(-45deg) translate(2.5em, -2.12em);
+    }
+
+    .change .bar6 {
+      transform: rotate(45deg) translate(-2.5em, -2.12em);
+	    -moz-transform: rotate(45deg) translate(-2.5em, -2.12em);
+    	-webkit-transform: rotate(45deg) translate(-2.5em, -2.12em);
+	    -ms-transform: rotate(45deg) translate(-2.5em, -2.12em);
+    	-o-transform: rotate(45deg) translate(-2.5em, -2.12em);
+    }
+
   }
 
   .downArrow {
