@@ -37,7 +37,7 @@ for (var i = 0; i < menuAttributes.length; i++) {
 }
 
 if (window.getComputedStyle(document.getElementById("buttonContainer")).display == "block") { // true if hamburger menu is the one active and not the dropdown menu
-    document.querySelector("#nav").querySelectorAll("li > a")[0].style = "padding-left: 1.3em;"; // adding padding to the first element which is pushed off-center due to the menu icon
+    document.querySelector("#nav").querySelectorAll("li > a")[0].style = "padding-left: 1.7em;"; // adding padding to the first element which is pushed off-center due to the menu icon
 }
 
 function clickedMenu(evt) {
