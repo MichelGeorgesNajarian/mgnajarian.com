@@ -11,6 +11,7 @@
 
   body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 20px;
     margin: 0px;
     width: 100%;
   }
@@ -274,12 +275,31 @@
     padding: 0em 5em 2em 4em;
   }
 
+  .row {
+    display: inline-block;
+    text-align: center;
+    margin: 3em;
+    vertical-align: middle;
+  }
+
   #home img {
-    width: 100%;
-    /* desktop version */
+    width: 750px;
+    border-radius: 5px;
   }
 
   @media all and (max-width: 991.98px) {
+    body {
+      font-size: 25px;
+    }
+
+    #container {
+      padding: 0em;
+    }
+
+    .row {
+      margin: 1em;
+    }
+
     #nav {
       -webkit-flex-flow: column wrap;
       flex-flow: column wrap;
@@ -344,6 +364,7 @@
     #scrollTop {
       width: 5em;
       height: 5em;
+      border-radius: 5em;
     }
 
     #scrollTop:hover {
@@ -353,7 +374,7 @@
 
     #scrollTop::after {
       border-width: 0.6em 0.6em 0 0;
-      top: 25px !important;
+      top: 1.25em !important;
       height: 35px;
       width: 35px;
     }
