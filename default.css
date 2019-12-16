@@ -341,20 +341,20 @@ h3 .row {
   border-radius: 0em;
 }
 
-.color1 {
+.even {
   background-color: #3E596B;
 }
 
-.color2 {
+.even h2 {
+  color: #294252;
+}
+
+.odd {
   background-color: #A7945D;
 }
 
-.color3 {
-  background-color: #484A74;
-}
-
-.color4 {
-  background-color: #A7865D;
+.odd h2 {
+  color: #C9B887;
 }
 
 @media all and (max-width: 991.98px) {
