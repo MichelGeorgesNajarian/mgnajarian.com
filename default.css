@@ -435,11 +435,17 @@ h3 .row {
     width: 3em;
     height: 3em;
     border-radius: 3em;
-    background-color: #3E596B !important;
+    background-color: #3E596B;
+  }
+
+  #scrollTop:hover {
+    background-color: #484A74;
+    color: #8C8DA9;
   }
 
   #scrollTop:active {
     cursor: pointer;
+    color: #8C8DA9;
     background-color: #484A74 !important;
   }
 
@@ -476,7 +482,7 @@ h3 .row {
 
   #about img {
     width: 1000px;
-    margin-left: -4em;
+    margin-left: -5em;
   }
 
   .section {
