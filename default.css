@@ -346,7 +346,7 @@ h3 .row {
 }
 
 .even h2 {
-  color: #294252;
+  color: #C9B887;
 }
 
 .odd {
@@ -354,7 +354,7 @@ h3 .row {
 }
 
 .odd h2 {
-  color: #C9B887;
+  color: #294252;
 }
 
 @media all and (max-width: 991.98px) {
