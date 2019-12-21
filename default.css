@@ -1,5 +1,5 @@
 body::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -10px;
   left: 0;
@@ -15,15 +15,15 @@ body {
   margin: 0px;
   width: 100%;
   background-color: #202020 !important;
-  color: #A7865D;
+  color: #a7865d;
 }
 
 h1 {
-  color: #F4DEC3;
+  color: #f4dec3;
 }
 
 h2 {
-  color: #C9B887;
+  color: #c9b887;
 }
 
 a {
@@ -31,15 +31,15 @@ a {
 }
 
 a:visited {
-  color: #C9B887;
+  color: #c9b887;
 }
 
 a:hover {
-  color: #A7945D;
+  color: #a7945d;
 }
 
 a:active {
-  color: #F4DEC3;
+  color: #f4dec3;
 }
 
 /* h3 .row {
@@ -52,14 +52,14 @@ h3.inline {
 
 .notClicked {
   background-color: inherit;
-  color: #EAEAEA;
+  color: #eaeaea;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   border-radius: 1em 1em;
 }
 
 .notClicked:hover {
-  color: #7E909B !important;
+  color: #7e909b !important;
 }
 
 .clicked {
@@ -75,7 +75,7 @@ h3.inline {
   overflow: hidden;
   top: 0;
   left: 0;
-  background-color: #1F6DC7 !important;
+  background-color: #1f6dc7 !important;
   float: right;
   background: url(images/loading_books.gif) center center no-repeat;
   z-index: 1337;
@@ -112,7 +112,7 @@ h3.inline {
 #nav {
   list-style: none;
   margin: 0;
-  background-color: #3E596B;
+  background-color: #3e596b;
   display: none;
   -webkit-flex-flow: row wrap;
   -o-flex-flow: row wrap;
@@ -120,7 +120,7 @@ h3.inline {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   justify-content: space-around;
-  background-color: #3E596B;
+  background-color: #3e596b;
   /*    text-align: center;*/
   min-height: 1.3em;
   padding-bottom: 0.5em;
@@ -142,11 +142,11 @@ h3.inline {
 }
 
 .items:hover {
-  background: #3E596B !important;
+  background: #3e596b !important;
 }
 
 #nav .items .clicked:hover {
-  color: #EAEAEA;
+  color: #eaeaea;
 }
 
 /*hamburger menu CSS*/
@@ -162,7 +162,7 @@ h3.inline {
 .bar3 {
   width: 50px;
   height: 10px;
-  background-color: #A7865D;
+  background-color: #a7865d;
   margin: 6px 0;
   transition: 0.5s;
   -webkit-transition: 0.5s;
@@ -202,8 +202,8 @@ h3.inline {
 .shown {
   border-bottom-left-radius: 1em 1em;
   border-bottom-right-radius: 1em 1em;
-  background-color: #3E596B;
-  color: #7E909B;
+  background-color: #3e596b;
+  color: #7e909b;
   display: block;
   padding: 0.3em;
 }
@@ -262,14 +262,14 @@ h3.inline {
 
 #scrollTop {
   display: inline-block;
-  background-color: #3E596B;
+  background-color: #3e596b;
   width: 50px;
   height: 50px;
   text-align: center;
   border-radius: 50px;
   position: fixed;
   bottom: 5px;
-  color: #7E909B;
+  color: #7e909b;
   right: 5px;
   opacity: 0;
   visibility: hidden;
@@ -302,8 +302,8 @@ h3.inline {
 
 #scrollTop:hover {
   cursor: pointer;
-  background-color: #484A74;
-  color: #8C8DA9;
+  background-color: #484a74;
+  color: #8c8da9;
 }
 
 #scrollTop.showBtn {
@@ -355,16 +355,16 @@ h3.inline {
 }
 
 .even {
-  background-color: #3E596B;
-  color: #A7945D;
+  background-color: #3e596b;
+  color: #a7945d;
 }
 
 .even h2 {
-  color: #C9B887;
+  color: #c9b887;
 }
 
 .odd {
-  background-color: #A7945D;
+  background-color: #a7945d;
   color: #173345;
 }
 
@@ -381,11 +381,15 @@ h3.inline {
 }
 
 .odd h2 a:hover {
-  color: #3E596B;
+  color: #3e596b;
 }
 
 .odd h2 a:active {
   color: #597181;
+}
+
+.dektop-inline {
+  display: inline-block;
 }
 
 @media all and (max-width: 991.98px) {
@@ -399,6 +403,10 @@ h3.inline {
 
   .row {
     margin: 1em 0em 1em 0em;
+  }
+
+  .dektop-inline {
+    display: block;
   }
 
   #nav {
@@ -466,18 +474,18 @@ h3.inline {
     width: 3em;
     height: 3em;
     border-radius: 3em;
-    background-color: #3E596B;
+    background-color: #3e596b;
   }
 
   #scrollTop:hover {
-    background-color: #484A74;
-    color: #8C8DA9;
+    background-color: #484a74;
+    color: #8c8da9;
   }
 
   #scrollTop:active {
     cursor: pointer;
-    color: #8C8DA9;
-    background-color: #484A74 !important;
+    color: #8c8da9;
+    background-color: #484a74 !important;
   }
 
   #scrollTop::after {
@@ -508,7 +516,7 @@ h3.inline {
   #buttonContainer:active .bar1,
   #buttonContainer:active .bar2,
   #buttonContainer:active .bar3 {
-    background-color: #3E596B;
+    background-color: #3e596b;
   }
 
   #about img {
@@ -520,7 +528,6 @@ h3.inline {
     width: 80%;
     border-radius: 0em;
   }
-
 }
 
 .downArrow {
@@ -530,7 +537,7 @@ h3.inline {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 10px solid #EAEAEA;
+  border-top: 10px solid #eaeaea;
 }
 
 @keyframes fade-in {
