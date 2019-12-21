@@ -31,19 +31,23 @@ a {
 }
 
 a:visited {
-  color: #C9AC87;
+  color: #C9B887;
 }
 
 a:hover {
-  color: #C9AC87;
+  color: #A7945D;
 }
 
 a:active {
   color: #F4DEC3;
 }
 
-h3 .row {
+/* h3 .row {
   margin: 20px 0px 20px 0px;
+} */
+
+h3.inline {
+  margin: 0px;
 }
 
 .notClicked {
@@ -318,6 +322,14 @@ h3 .row {
   vertical-align: middle;
 }
 
+#experience {
+  padding-top: 3em;
+}
+
+#experience .row {
+  margin: 0px;
+}
+
 .img {
   width: 60%;
 }
@@ -339,10 +351,12 @@ h3 .row {
   background-color: #173345;
   padding: 1em;
   border-radius: 0em;
+  text-align: left;
 }
 
 .even {
   background-color: #3E596B;
+  color: #A7945D;
 }
 
 .even h2 {
@@ -351,10 +365,27 @@ h3 .row {
 
 .odd {
   background-color: #A7945D;
+  color: #173345;
 }
 
 .odd h2 {
   color: #294252;
+}
+
+.odd h2 a {
+  color: inherit;
+}
+
+.odd h2 a:visited {
+  color: #294252;
+}
+
+.odd h2 a:hover {
+  color: #3E596B;
+}
+
+.odd h2 a:active {
+  color: #597181;
 }
 
 @media all and (max-width: 991.98px) {
