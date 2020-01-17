@@ -18,6 +18,13 @@ body {
   color: #a7865d;
 }
 
+body::after {
+  width: 100%;
+  height: 10px;
+  content: '';
+  position: absolute;
+}
+
 h1 {
   color: #f4dec3;
 }
@@ -346,12 +353,24 @@ h3.inline {
   border-radius: 1em;
 }
 
+.icons {
+  font-size: 5em;
+}
+
+.icons .section {
+  padding: 0em;
+  background-color: inherit;
+}
+
 .sectionFull {
   width: 100%;
   background-color: #173345;
-  padding: 1em;
   border-radius: 0em;
   text-align: left;
+}
+
+.info {
+  padding: 1em;
 }
 
 .even {
@@ -527,6 +546,14 @@ h3.inline {
   .section {
     width: 80%;
     border-radius: 0em;
+  }
+
+  .icons {
+    font-size: 3em;
+  }
+
+  .icons .section {
+    width: 30%;
   }
 }
 
