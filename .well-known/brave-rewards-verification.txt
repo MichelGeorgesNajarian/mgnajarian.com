@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: mgnajarian.com
+Token: 31aa82c6be224a73083e165ff00066ff6c5ee8d6961ba1c614cba884d919ee78
