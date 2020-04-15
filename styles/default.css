@@ -557,6 +557,16 @@ h3.inline {
   }
 }
 
+@media all and (max-width: 754px) {
+	.section {
+		display: block;
+		width: 100% !important; 
+	}
+	.icons .section {
+		width: 100%;
+	}
+}
+
 .downArrow {
   margin-left: 1em;
   display: inline-block;
