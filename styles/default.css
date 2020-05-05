@@ -31,6 +31,7 @@ h1 {
 
 h2 {
   color: #c9b887;
+  margin-top: 0.3em;
 }
 
 a {
@@ -55,6 +56,11 @@ a:active {
 
 h3.inline {
   margin: 0px;
+}
+
+sub {
+  font-size: small;
+  display: block;
 }
 
 .notClicked {
@@ -84,7 +90,7 @@ h3.inline {
   left: 0;
   background-color: #1f6dc7 !important;
   float: right;
-  background: url(images/loading_books.gif) center center no-repeat;
+  background: url(../images/loading_books.gif) center center no-repeat;
   z-index: 1337;
 }
 
@@ -354,7 +360,7 @@ h3.inline {
 }
 
 .icons {
-  font-size: 5em;
+  font-size: 3em;
 }
 
 .icons .section {
@@ -370,7 +376,7 @@ h3.inline {
 }
 
 .info {
-  padding: 1em;
+  padding: 0.3em;
 }
 
 .even {
@@ -548,9 +554,9 @@ h3.inline {
     border-radius: 0em;
   }
 
-  .icons {
+  /* .icons {
     font-size: 3em;
-  }
+  } */
 
   .icons .section {
     width: 30%;
