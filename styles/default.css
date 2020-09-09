@@ -439,9 +439,9 @@ sub {
   color: inherit;
 }
 
-.odd h2 a:visited {
+/*.odd h2 a:visited {
   color: #294252;
-}
+}*/
 
 .odd h2 a:hover {
   color: #3e596b;
