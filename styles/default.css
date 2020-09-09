@@ -43,7 +43,7 @@ a {
 } */
 
 a:hover {
-  color: #3e596b;
+  color: #294252;
 }
 
 a:active {
@@ -374,7 +374,7 @@ sub {
     width: 100%;
     border: none;
     color: #7e909b;
-    font-size: 20px;
+    font-size: 35px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.5s;
@@ -401,9 +401,14 @@ sub {
   /* width: calc(100% - 0.5em); */
   background-color: #173345;
   border-radius: 0em;
-  text-align: left;
+  text-align: center;
   margin: 0.5em;
-  /* width: auto; */
+  width: auto;
+  width: 20%;
+  overflow: hidden;
+  max-height: 3em;
+  vertical-align: top;
+  min-width: 15em;
 }
 
 .info {
@@ -413,7 +418,7 @@ sub {
 .even {
   background-color: #3e596b;
   color: #7e909b;
-  transition: background-color 0.5s;
+  transition: background-color 1s, max-height 2s;
 }
 
 .even h2 {
@@ -423,7 +428,7 @@ sub {
 .odd {
   background-color: #173345;
   color: #7e909b;
-  transition: background-color 0.5s;
+  transition: background-color 1s, max-height 2s;
 }
 
 .odd h2 {
@@ -448,14 +453,49 @@ sub {
 
 .even:hover {
   background-color: #484a74;
+  max-height: 20em;
 }
 
 .odd:hover {
   background-color: #2e2f4a;
+  max-height: 20em;
 }
 
 .dektop-inline {
   display: inline-block;
+}
+
+.banner {
+    margin: 2em;
+    /* width: 500px; */
+}
+
+.banner img {
+  width: calc(100% - 4em);
+}
+
+@media all and (max-width: 1400px) {
+  .sectionFull {
+    margin: 1em 4em 1em 4em !important;
+  }
+
+  .alt-even {
+    background-color: #3e596b;
+  }
+
+  .alt-odd {
+    background-color: #173345;
+  }
+
+  .alt-even:hover {
+    background-color: #484a74;
+    max-height: 20em;
+  }
+
+  .alt-odd:hover {
+    background-color: #2e2f4a;;
+    max-height: 20em;
+  }
 }
 
 @media all and (max-width: 991.98px) {
@@ -670,3 +710,4 @@ sub {
     top: -30em;
   }
 }
+
