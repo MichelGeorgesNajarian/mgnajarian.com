@@ -58,6 +58,8 @@ for (var i = 0; i < menuAttributes.length; i++) {
     menuAttributes[i].addEventListener('click', clickedMenu);
 }
 
+
+
 function clickedMenu(evt) {
     var allAttr = document.querySelectorAll("ul#nav li a.menu-option");
     //"unclick" veery menu item
