@@ -418,6 +418,10 @@ sub {
   padding: 0.3em;
 }
 
+.info h2 div {
+  margin-bottom: 1em;
+}
+
 .even {
   background-color: #3e596b;
   color: #7e909b;
@@ -456,12 +460,12 @@ sub {
 
 .even:hover {
   background-color: #484a74;
-  max-height: 20em;
+  max-height: 23em;
 }
 
 .odd:hover {
   background-color: #2e2f4a;
-  max-height: 20em;
+  max-height: 23em;
 }
 
 .dektop-inline {
