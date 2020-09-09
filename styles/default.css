@@ -294,10 +294,10 @@ sub {
   opacity: 0;
   visibility: hidden;
   z-index: 69420;
-  transition: opacity 0.5s, visibility 0.5s;
-  -webkit-transition: opacity 0.5s, visibility 0.5s;
-  -moz-transition: opacity 0.5s, visibility 0.5s;
-  -o-transition: opacity 0.5s, visibility 0.5s;
+  transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
+  -webkit-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
+  -moz-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
+  -o-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
 }
 
 #scrollTop::after {
@@ -308,6 +308,10 @@ sub {
   height: 20px;
   width: 20px;
   transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
   display: inline-block;
   position: relative;
   top: 15px;
@@ -324,6 +328,7 @@ sub {
   cursor: pointer;
   background-color: #484a74;
   color: #8c8da9;
+  box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
 }
 
 #scrollTop.showBtn {
@@ -380,11 +385,16 @@ sub {
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    -webkit-transition: background-color 0.5s, box-shadow 0.5s;
+    -moz-transition: background-color 0.5s, box-shadow 0.5s;
+    -ms-transition: background-color 0.5s, box-shadow 0.5s;
+    -o-transition: background-color 0.5s, box-shadow 0.5s;
   }
 
   #resumeBtn:hover {
     background-color: #2e2f4a;
+    box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
   }
 
   #resumeBtn:active {
@@ -427,6 +437,10 @@ sub {
   background-color: #3e596b;
   color: #7e909b;
   transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -webkit-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -moz-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -ms-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -o-transition: background-color 1s, max-height 2s, box-shadow 2s;
 }
 
 .even h2 {
@@ -437,6 +451,10 @@ sub {
   background-color: #173345;
   color: #7e909b;
   transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -webkit-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -moz-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -ms-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -o-transition: background-color 1s, max-height 2s, box-shadow 2s;
 }
 
 .odd h2 {
