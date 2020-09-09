@@ -412,6 +412,7 @@ sub {
   max-height: 2.9em;
   vertical-align: top;
   min-width: 15em;
+  box-shadow: 0px 0 0px rgba(128, 86, 10, 0.8);
 }
 
 .info {
@@ -425,7 +426,7 @@ sub {
 .even {
   background-color: #3e596b;
   color: #7e909b;
-  transition: background-color 1s, max-height 2s;
+  transition: background-color 1s, max-height 2s, box-shadow 2s;
 }
 
 .even h2 {
@@ -435,7 +436,7 @@ sub {
 .odd {
   background-color: #173345;
   color: #7e909b;
-  transition: background-color 1s, max-height 2s;
+  transition: background-color 1s, max-height 2s, box-shadow 2s;
 }
 
 .odd h2 {
@@ -460,12 +461,14 @@ sub {
 
 .even:hover {
   background-color: #484a74;
-  max-height: 23em;
+  max-height: 30em;
+  box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
 }
 
 .odd:hover {
   background-color: #2e2f4a;
-  max-height: 23em;
+  max-height: 30em;
+  box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
 }
 
 .dektop-inline {
