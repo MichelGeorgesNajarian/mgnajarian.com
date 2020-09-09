@@ -350,7 +350,7 @@ sub {
 .rowSection {
   display: inline-block;
   text-align: center;
-  margin: 1em 0.5em 1em 0.5em;
+  margin: auto;
   vertical-align: middle;
   width: 30%;
 }
