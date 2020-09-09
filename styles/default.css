@@ -477,6 +477,10 @@ sub {
     width: 80%;
   }
 
+  .icons .rowSection {
+    width: 30%;
+  }
+
   .dektop-inline {
     display: block;
   }
@@ -612,9 +616,9 @@ sub {
 
 @media all and (max-width: 754px) {
 
-	.icons .section {
-		width: 100%;
-	}
+	.icons .rowSection {
+    width: 100%;
+  }
 }
 
 .downArrow {
