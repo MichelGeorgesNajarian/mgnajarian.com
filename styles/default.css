@@ -502,7 +502,7 @@ sub {
   width: calc(100% - 4em);
 }
 
-@media all and (max-width: 1400px) {
+@media all and (max-width: 1400px){
   .sectionFull {
     margin: 1em 4em 1em 4em !important;
   }
@@ -517,12 +517,12 @@ sub {
 
   .alt-even:hover {
     background-color: #484a74;
-    max-height: 20em;
+    max-height: 25em;
   }
 
   .alt-odd:hover {
     background-color: #2e2f4a;;
-    max-height: 20em;
+    max-height: 25em;
   }
 }
 
@@ -680,6 +680,14 @@ sub {
   /* .icons {
     font-size: 3em;
   } */
+
+  .even {
+    background-color: #3e596b;
+  }
+
+  .odd {
+    background-color: #173345;
+  }
 
   .icons .section {
     width: 30%;
