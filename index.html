@@ -168,34 +168,129 @@
                     <img src="images/uni_sign.jpg" alt="Banner picture with University of Waterloo sign">
                 </div>
                 <div id="projects">
-                    <hr>
-                    <h1>Projects Section</h1>
-                    <hr>
+                    <h2>Some Side Projects</h2>
+                    <div class="rowSection proj">
+                        <h3><a href="https://github.com/MichelGeorgesNajarian/BeautifyTvShowDirectory"
+                                target="blank">BeautifyTvShowDirectory</a></h3>
+                        <ph4>Technologies used: Java &#8226; Maven &#8226; RESTful APIs</h4>
+                            <p>Using <a href="https://www.themoviedb.org/documentation/api" target="blank">TMDb's public
+                                    API</a>, this project's main feature recursively renames all TV shows video files
+                                inside
+                                a root folder into appropriate and clean names.</p>
+                            <p>For example, if we have the following files:</p>
+                            <ul>
+                                <li>
+                                    Doctor.WhoS01E05dtsH265.mkv
+                                </li>
+                                <li>
+                                    Doctor.Who.S01E06.mkv
+                                </li>
+                                <li>
+                                    Doctor.Who.s02e8.mkv
+                                </li>
+                                <li>
+                                    Game.of.Thrones.s1e1.mkv
+                                </li>
+                            </ul>
+                            <p>we'd get the following results after running the application:</p>
+                            <ul>
+                                <li><i class="fas fa-folder"></i>
+                                    Doctor Who
+                                    <ul>
+                                        <li><i class="fas fa-folder"></i>
+                                            Season 01
+                                            <ul>
+                                                <li><i class="fas fa-file-video"></i>&nbsp;Doctor Who S01E05 - World War
+                                                    Three.mkv
+                                                </li>
+                                                <li><i class="fas fa-file-video"></i>&nbsp;Doctor Who S01E06 - Dalek.mkv
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><i class="fas fa-folder"></i>
+                                            Season 2
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-file-video"></i>&nbsp;Doctor Who S02E08 - The
+                                                    Impossible Planet.mkv
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fas fa-folder"></i> Game of Thrones
+                                    <ul>
+
+                                        <li><i class="fas fa-folder"></i>
+                                            Season 01
+                                            <ul>
+                                                <li><i class="fas fa-file-video"></i>&nbsp;Game of Thrones S01E01 -
+                                                    Winter
+                                                    is Coming.mkv
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                    </div>
+                    <div class="rowSection proj">
+                        <h3><a href="https://github.com/MichelGeorgesNajarian/ChangeMaker"
+                                target="blank">ChangeMaker</a></h3>
+                        <h4>Programming Language: C++</h4>
+                        <p>Using dynamic programming, this application would keep track of the number of coins and bills
+                            of different values and given an input such as a total amount and cash amount given by a
+                            customer, the application would tell the cashier the most efficient way to return the change
+                            (i.e. using the least amount of bills and coins </p>
+                        <p>In case a a significant decrease of the number of coins of a certain value, the odds of this
+                            coin value to be returned decreases significantly due to the probability amd random
+                            functions implemented</p>
+                        <p>For example, if the total sum is $63.27, and a customer gave $65.00, then the change would be
+                            $2.75 (there are no &#162;1 in Canada) which would be returned as a single $2 coin and 3
+                            &#162;25 coins</p>
+                    </div>
+                    <div class="rowSection proj">
+                        <h3>Embedded project: Bike Radar</h3>
+                        <h4>Technologies used: TI MSP430 &#8226; C</h4>
+                        <p>Used the Texas Instruments microcontroller MSP430, as well as other components such as an
+                            ultrasonic radar, a keypad, colored LEDs and resistances of differnet values to balance the
+                            currents. A user can enter the amximum distance to sense and depending on the distance of
+                            the bike with the nearest object, different color LEDs light up</p>
+                        <ul>
+                            <li>Red: nearest object is dangerously close</li>
+                            <li>Orange nearest object is relatively close </li>
+                            <li>Yellow: nearest object is relatively far</li>
+                            <li>Green: nearest object is far</li>
+                        </ul>
+                        <p>All components such as the ultrasonic distance sensor, the LEDs or resistors were soldered on
+                            a daughterboard. Daughterboard PCB routes were traced manually</p>
+                    </div>
                 </div>
+            </div>
+            <footer>
                 <div id="social">
                     <div class="icons">
                         <div class="row rowSection">
                             <a href="https://github.com/MichelGeorgesNajarian/" target="blank"
                                 title="Checkout my GitHub">
                                 <i class="fab fa-github"></i>
-                                <sub>/MichelGeorgesNajarian</sub>
                             </a>
                         </div>
                         <div class="row rowSection">
                             <a href="mailto:michel.georges@mgnajarian.com" target="blank" title="Email me!">
                                 <i class="fas fa-inbox"></i>
-                                <sub>michel.georges@mgnajarian.com</sub>
                             </a>
                         </div>
                         <div class="row rowSection">
                             <a href="https://www.linkedin.com/in/mgnajarian/" target="blank" title="Let's connect">
                                 <i class="fab fa-linkedin"></i>
-                                <sub>/mgnajarian</sub>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
+                <p>Copyright &#169; Michel Georges Najarian &#8226; 2020</p>
+            </footer>
             <script src="main.js"></script>
     </body>
 
