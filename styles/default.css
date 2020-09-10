@@ -334,6 +334,7 @@ sub {
 #scrollTop.showBtn {
   opacity: 1;
   visibility: visible;
+  margin: 20px;
 }
 
 #container {
@@ -437,7 +438,7 @@ sub {
   background-color: #3e596b;
   color: #7e909b;
   transition: background-color 1s, max-height 2s, box-shadow 2s;
-  -webkit-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -webkit-transition: background-color 1s, max-height 4s, box-shadow 2s;
   -moz-transition: background-color 1s, max-height 2s, box-shadow 2s;
   -ms-transition: background-color 1s, max-height 2s, box-shadow 2s;
   -o-transition: background-color 1s, max-height 2s, box-shadow 2s;
@@ -451,7 +452,7 @@ sub {
   background-color: #173345;
   color: #7e909b;
   transition: background-color 1s, max-height 2s, box-shadow 2s;
-  -webkit-transition: background-color 1s, max-height 2s, box-shadow 2s;
+  -webkit-transition: background-color 1s, max-height 4s, box-shadow 2s;
   -moz-transition: background-color 1s, max-height 2s, box-shadow 2s;
   -ms-transition: background-color 1s, max-height 2s, box-shadow 2s;
   -o-transition: background-color 1s, max-height 2s, box-shadow 2s;
@@ -481,12 +482,14 @@ sub {
   background-color: #484a74;
   max-height: 30em;
   box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
+  transition: max-height 2s;
 }
 
 .odd:hover {
   background-color: #2e2f4a;
   max-height: 30em;
   box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
+  transition: max-height 2s;
 }
 
 .dektop-inline {
@@ -494,7 +497,7 @@ sub {
 }
 
 .banner {
-    margin: 2em;
+    margin: 1em 2em 1em 2em;
     /* width: 500px; */
 }
 
@@ -578,6 +581,7 @@ sub {
     padding: 0.1em;
     position: relative;
     z-index: 1337;
+    margin-right: 20px;
   }
 
   #nav a {
