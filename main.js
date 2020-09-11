@@ -2,7 +2,7 @@
 window.addEventListener("load", function () {
     document.getElementById("ready").style.display = "block";
     document.getElementById("loading").style.display = "none";
-    this.alert("The website is still in development. Once that it's done the alert won't pop-up anymore");
+    // this.alert("The website is still in development. Once that it's done the alert won't pop-up anymore");
 });
 
 //display or hide scroll to top btn

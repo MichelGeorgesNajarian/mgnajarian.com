@@ -352,6 +352,10 @@ footer {
   margin: 3em 0em 8em 0em;
 }
 
+.main {
+  padding-top: 3em;
+}
+
 .row {
   display: inline-block;
   text-align: center;
@@ -568,6 +572,11 @@ footer {
 
   #container {
     padding: 0em;
+    margin: 0em;
+  }
+
+  .main {
+    padding-top: 0em;
   }
 
   .row {
