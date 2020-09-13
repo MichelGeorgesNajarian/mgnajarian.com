@@ -96,3 +96,5 @@ const toggleMenu = async (x) => {
         document.getElementById("navWrapper").style.height = "auto";
     }
 }
+
+document.getElementById("year").innerText = new Date().getFullYear();
