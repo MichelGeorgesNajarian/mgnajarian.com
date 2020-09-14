@@ -326,6 +326,7 @@ footer {
   z-index: 69420;
   margin: 20px;
   transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
+  -ms-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
   -webkit-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
   -moz-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
   -o-transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
@@ -774,6 +775,38 @@ footer {
   .banner img {
     width: 1200px;
     margin-left: -3.5em;
+  }
+
+  .even:active {
+  background-color: #484a74;
+  max-height: 30em;
+  box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
+  transition: max-height 2s;
+  -webkit-transition: max-height 2s;
+  -moz-transition: max-height 2s;
+  -ms-transition: max-height 2s;
+  -o-transition: max-height 2s;
+}
+
+.odd:active {
+  background-color: #2e2f4a;
+  max-height: 30em;
+  box-shadow: 0px 0 20px rgba(128, 86, 10, 0.8);
+  transition: max-height 2s;
+  -webkit-transition: max-height 2s;
+  -moz-transition: max-height 2s;
+  -ms-transition: max-height 2s;
+  -o-transition: max-height 2s;
+}
+
+.alt-even:active {
+    background-color: #484a74;
+    max-height: 25em;
+  }
+
+  .alt-odd:active {
+    background-color: #2e2f4a;;
+    max-height: 25em;
   }
 }
 
