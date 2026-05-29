@@ -18,7 +18,9 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <CardTitle>Sample Card Header</CardTitle>
-                <CardDescription>This is a sample description to see how it will look</CardDescription>
+                <CardDescription>
+                  This is a sample description to see how it will look
+                </CardDescription>
                 <CardAction>sample action</CardAction>
               </CardHeader>
               <CardContent>
