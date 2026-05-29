@@ -19,6 +19,12 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+export const metadata: Metadata = {
+  title: "Michel Georges Najarian's personal website",
+  description:
+    "A personal website for Michel Georges Najarian, a software engineer and open source enthusiast.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
