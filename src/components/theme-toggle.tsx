@@ -11,20 +11,15 @@ export function ThemeToggle() {
   return (
     <Button
       onClick={toggle}
-      variant="ghost"
+      variant="outline"
+      size="icon"
       aria-label={
         theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
       }
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="rounded-full p-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+      className="rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
     >
-      {theme === "dark" ? (
-        // Sun icon
-        <HugeiconsIcon icon={SunIcon} />
-      ) : (
-        // Moon icon
-        <HugeiconsIcon icon={Moon02Icon} />
-      )}
+      <HugeiconsIcon icon={theme === "dark" ? SunIcon : Moon02Icon} />
     </Button>
   );
 }

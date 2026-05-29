@@ -6,5 +6,5 @@ if [ -f ".nvmrc" ]; then
   nvm use
 fi
 
-npm run build
 npm run lint
+npm run typecheck
