@@ -20,8 +20,13 @@ const geistMono = localFont({
 
 const fullTitle = `${site.name} — ${site.title}`;
 
+// The develop preview is served from a sub-path (see next.config.ts) and must
+// not be indexed.
+const basePath = process.env.BASE_PATH ?? "";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(`${site.url}${basePath}`),
+  ...(basePath && { robots: { index: false, follow: false } }),
   title: {
     default: fullTitle,
     template: `%s · ${site.name}`,
