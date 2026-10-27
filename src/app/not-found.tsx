@@ -10,7 +10,7 @@ export default function NotFound() {
         Page not found
       </h1>
       <p className="mt-4 text-muted-foreground">
-        The page you&apos;re looking for doesn&apos;t exist or has moved.
+        The page you&rsquo;re looking for doesn&rsquo;t exist or has moved.
       </p>
       <Link href="/" className={`${buttonVariants()} mt-8`}>
         Back home

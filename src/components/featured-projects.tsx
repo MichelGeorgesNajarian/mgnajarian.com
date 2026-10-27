@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { projects } from "@/data/projects";
+import { buttonVariants } from "@/components/ui/button";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
@@ -19,6 +21,14 @@ export function FeaturedProjects() {
           </li>
         ))}
       </ul>
+      <div className="mt-10 flex justify-center">
+        <Link
+          href="/projects/"
+          className={buttonVariants({ variant: "outline" })}
+        >
+          All projects
+        </Link>
+      </div>
     </Section>
   );
 }

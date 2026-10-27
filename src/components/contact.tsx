@@ -10,10 +10,10 @@ export function Contact() {
     <Section id="contact" width="prose" className="border-t text-center">
       <Reveal>
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Let&apos;s talk
+          Let&rsquo;s talk
         </h2>
         <p className="mt-3 text-muted-foreground">
-          I&apos;m always happy to chat about new roles, projects, or a good
+          I&rsquo;m always happy to chat about new roles, projects, or a good
           engineering problem.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

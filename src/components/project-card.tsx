@@ -1,9 +1,7 @@
-import Image from "next/image";
+import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import type { Project } from "@/data/projects";
-import { withBasePath } from "@/lib/base-path";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -14,32 +12,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+/** Text-only on purpose: mixed image/no-image cards misalign their titles. Images live on the detail page. */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="h-full transition duration-200 hover:-translate-y-2 hover:shadow-md">
-      {project.image && (
-        <div
-          className={cn(
-            "overflow-hidden",
-            project.imageFit === "contain" && "bg-transparent",
-          )}
-        >
-          <Image
-            src={withBasePath(project.image)}
-            alt={project.imageAlt ?? ""}
-            width={800}
-            height={450}
-            className={cn(
-              "aspect-video w-full transition-transform duration-300 group-hover/card:scale-105",
-              project.imageFit === "contain"
-                ? "object-contain"
-                : "object-cover",
-            )}
-          />
-        </div>
-      )}
+    <Card className="relative h-full transition duration-200 hover:-translate-y-2 hover:shadow-md">
       <CardHeader>
-        <CardTitle className="text-base">{project.title}</CardTitle>
+        <CardTitle className="text-base">
+          {/* Stretched link: the whole card opens the detail page. */}
+          <Link
+            href={`/projects/${project.slug}/`}
+            className="outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-3 focus-visible:after:ring-ring/50"
+          >
+            {project.title}
+          </Link>
+        </CardTitle>
         <CardDescription>{project.summary}</CardDescription>
       </CardHeader>
       <CardContent className="mt-auto">
@@ -56,7 +42,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.demoUrl && (
             <a
               href={project.demoUrl}
-              className="inline-flex items-center gap-1 text-primary hover:underline"
+              className="relative z-10 inline-flex items-center gap-1 text-primary hover:underline"
             >
               {project.demoLabel ?? "Live demo"}
               <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
@@ -65,7 +51,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.repo && (
             <a
               href={project.repo}
-              className="inline-flex items-center gap-1 text-primary hover:underline"
+              className="relative z-10 inline-flex items-center gap-1 text-primary hover:underline"
             >
               Source
               <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
