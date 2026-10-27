@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mgnajarian.com
 
-## Getting Started
+Personal website of Michel Georges Najarian: <https://mgnajarian.com>
 
-First, run the development server:
+Built with [Next.js](https://nextjs.org) 16 (App Router, static export), React 19, TypeScript, [Tailwind CSS](https://tailwindcss.com) v4 and [shadcn/ui](https://ui.shadcn.com) (Base UI primitives, Hugeicons). Theming uses `next-themes`; scroll animations use `motion`. It is hosted on GitHub Pages.
+
+## Getting started
+
+Requires Node 24 (see `.nvmrc`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use
+npm ci
+npm run dev   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Script              | What it does                                |
+| ------------------- | ------------------------------------------- |
+| `npm run dev`       | Start the dev server                        |
+| `npm run build`     | Static export to `out/`                     |
+| `npm run lint`      | ESLint (and Prettier), fails on any warning |
+| `npm run lint:fix`  | Auto-fix lint and formatting issues         |
+| `npm run typecheck` | `tsc --noEmit`                              |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A Husky pre-push hook runs `lint` and `typecheck`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/app/            Routes: home, /projects, /projects/[slug], layout, 404, manifest
+src/components/     Site components (hero, experience, project cards, header, footer, ...)
+src/components/ui/  shadcn/ui components
+src/data/           Site content as typed data (see below)
+src/lib/            Helpers (base path, date formatting, page metadata, cn)
+public/             Static files: images, résumé PDF, CNAME
+plan/               The redesign plan this site is being built from
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Updating content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Content lives in `src/data/`, not in the components:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `site.ts`: name, tagline, email, social links, nav, link-preview text and image
+- `experience.ts`, `skills.ts`, `education.ts`: résumé content
+- `projects.ts`: one entry per project. Each gets a card and a page at `/projects/<slug>/`. Set `featured: true` to show it on the home page, and `embedUrl` to embed a demo on its page.
 
-## Deploy on Vercel
+Static files go in `public/`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Images: use WebP (`public/images/`). Everything in `public/` is published, so keep large originals out of it. The link-preview image (`og.jpg`) must stay JPEG or PNG, because link-preview crawlers don't reliably support WebP.
+- Résumé PDF: `public/documents/`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Branches and deployment
+
+`develop` is the default branch. Open pull requests into `develop`; when it's ready, open a single PR from `develop` into `master`.
+
+- **CI** (`.github/workflows/ci.yml`): lint, typecheck and build run as separate jobs on pull requests into `develop` or `master`, and on pushes to `develop`.
+- **Deploy** (`.github/workflows/deploy-site.yml`): a push to `master` or `develop` builds both branches and publishes them together, because GitHub Pages serves one site per repo:
+  - `master` is served at <https://mgnajarian.com/> (production)
+  - `develop` is served at <https://mgnajarian.com/develop/> (preview, `noindex`)
+
+The `develop` build sets `BASE_PATH=/develop` (read in `next.config.ts`). `next/link` and built assets handle the prefix automatically, but anything in `public/` that is referenced by a plain path needs `withBasePath()` from `src/lib/base-path.ts`.
+
+Repo settings this relies on:
+
+- Settings → Pages: source is **GitHub Actions**, custom domain `mgnajarian.com`, HTTPS enforced.
+- Settings → Environments → `github-pages`: deployment branches include both `develop` and `master`.

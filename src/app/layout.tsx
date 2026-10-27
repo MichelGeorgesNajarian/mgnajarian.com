@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
+import { basePath } from "@/lib/base-path";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -20,10 +21,6 @@ const geistMono = localFont({
 
 const fullTitle = `${site.name} — ${site.title}`;
 
-// The develop preview is served from a sub-path (see next.config.ts) and must
-// not be indexed.
-const basePath = process.env.BASE_PATH ?? "";
-
 export const metadata: Metadata = {
   metadataBase: new URL(`${site.url}${basePath}`),
   ...(basePath && { robots: { index: false, follow: false } }),
@@ -40,14 +37,21 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: site.name,
     title: fullTitle,
-    description: site.description,
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    description: site.ogDescription,
+    images: [
+      {
+        url: site.ogImage.path,
+        width: site.ogImage.width,
+        height: site.ogImage.height,
+        alt: site.ogImage.alt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: fullTitle,
-    description: site.description,
-    images: ["/og.png"],
+    description: site.ogDescription,
+    images: [{ url: site.ogImage.path, alt: site.ogImage.alt }],
   },
 };
 
