@@ -1,11 +1,11 @@
 # Builds the Next.js site as a static export and deploys it to GitHub Pages.
-# Pull requests only build (lint, typecheck, build); pushes to master also deploy.
+# Lint, typecheck and build are checked on every PR by ci.yml, so this
+# workflow only runs when changes land on master.
 name: Deploy Next.js site to Pages
 
 on:
   push:
     branches: ["master"]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -16,8 +16,11 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the
 # in-progress run and the latest queued. Don't cancel in-progress deployments.
 concurrency:
-  group: "pages-${{ github.ref }}"
+  group: "pages"
   cancel-in-progress: false
+
+env:
+  HUSKY: "0"
 
 jobs:
   build:
@@ -41,10 +44,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
       - name: Install dependencies
         run: npm ci
-      - name: Lint
-        run: npm run lint
-      - name: Typecheck
-        run: npm run typecheck
       - name: Build
         run: npm run build
       - name: Upload artifact
@@ -53,7 +52,6 @@ jobs:
           path: ./out
 
   deploy:
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
