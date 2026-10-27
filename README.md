@@ -27,7 +27,7 @@ A Husky pre-push hook runs `lint` and `typecheck`.
 ## Project structure
 
 ```
-src/app/            Routes: home, /projects, /projects/[slug], layout, 404, manifest
+src/app/            Routes: home, /projects, /projects/[slug], /resume, layout, 404, manifest
 src/components/     Site components (hero, experience, project cards, header, footer, ...)
 src/components/ui/  shadcn/ui components
 src/data/           Site content as typed data (see below)
