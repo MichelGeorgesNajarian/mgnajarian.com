@@ -7,6 +7,8 @@ const basePath = process.env.BASE_PATH ?? "";
 const nextConfig: NextConfig = {
   output: "export",
   ...(basePath && { basePath }),
+  // Make the base path available to app code (see src/lib/base-path.ts).
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   // /blog/foo/ -> blog/foo/index.html (GitHub Pages friendly)
   trailingSlash: true,
   // No image optimization server on GitHub Pages
