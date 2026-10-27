@@ -2,24 +2,26 @@
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import { SunIcon, Moon02Icon } from "@hugeicons/core-free-icons";
-import { useTheme } from "./theme-provider";
+import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 
 export function ThemeToggle() {
-  const { theme, toggle } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const next = resolvedTheme === "dark" ? "light" : "dark";
 
+  // Both icons are rendered and swapped with CSS so the server and client
+  // markup match (the resolved theme is unknown during SSR).
   return (
     <Button
-      onClick={toggle}
-      variant="outline"
+      onClick={() => setTheme(next)}
+      variant="ghost"
       size="icon"
-      aria-label={
-        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-      }
-      title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
+      aria-label="Toggle theme"
+      title="Toggle theme"
+      className="rounded-full"
     >
-      <HugeiconsIcon icon={theme === "dark" ? SunIcon : Moon02Icon} />
+      <HugeiconsIcon icon={Moon02Icon} className="dark:hidden" />
+      <HugeiconsIcon icon={SunIcon} className="hidden dark:block" />
     </Button>
   );
 }

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { site } from "@/data/site";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,10 +18,32 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const fullTitle = `${site.name} — ${site.title}`;
+
 export const metadata: Metadata = {
-  title: "Michel Georges Najarian's personal website",
-  description:
-    "A personal website for Michel Georges Najarian, a software engineer and open source enthusiast.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: fullTitle,
+    template: `%s · ${site.name}`,
+  },
+  description: site.description,
+  alternates: {
+    types: { "application/rss+xml": "/feed.xml" },
+  },
+  openGraph: {
+    type: "website",
+    url: site.url,
+    siteName: site.name,
+    title: fullTitle,
+    description: site.description,
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: fullTitle,
+    description: site.description,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
@@ -31,15 +52,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-white text-black antialiased dark:bg-black dark:text-white`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(geistSans.variable, geistMono.variable)}
+    >
+      <body className="bg-background text-foreground antialiased">
         <ThemeProvider>
-          <div className="fixed top-4 right-4 z-50">
-            <ThemeToggle />
+          <a
+            href="#content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:shadow-md"
+          >
+            Skip to content
+          </a>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main id="content" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
           </div>
-          {children}
         </ThemeProvider>
       </body>
     </html>
