@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next";
+import { basePath } from "@/lib/base-path";
 
 export const dynamic = "force-static";
-
-// Prefix for the develop preview, which is served from a sub-path.
-const basePath = process.env.BASE_PATH ?? "";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
