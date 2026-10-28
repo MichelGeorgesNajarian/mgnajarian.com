@@ -11,7 +11,9 @@ interface ProjectImageProps {
 
 /** A project's image at 16:9: cropped to fill, or shown whole for product shots. */
 export function ProjectImage({ project, className }: ProjectImageProps) {
-  if (!project.image) return null;
+  if (!project.image) {
+    return null;
+  }
 
   return (
     <div className="overflow-hidden">

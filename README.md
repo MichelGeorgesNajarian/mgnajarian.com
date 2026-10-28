@@ -27,9 +27,11 @@ A Husky pre-push hook runs `lint` and `typecheck`.
 ## Project structure
 
 ```
-src/app/            Routes: home, /projects, /projects/[slug], /resume, layout, 404, manifest
+src/app/            Routes: home, /projects, /projects/[slug], /resume, /blog, /blog/[slug],
+                    sitemap, robots, feed.xml, layout, 404, manifest
 src/components/     Site components (hero, experience, project cards, header, footer, ...)
 src/components/ui/  shadcn/ui components
+src/content/blog/   Blog posts (MDX)
 src/data/           Site content as typed data (see below)
 src/lib/            Helpers (base path, date formatting, page metadata, cn)
 public/             Static files: images, résumé PDF, CNAME
@@ -43,6 +45,23 @@ Content lives in `src/data/`, not in the components:
 - `site.ts`: name, tagline, email, social links, nav, link-preview text and image
 - `experience.ts`, `skills.ts`, `education.ts`: résumé content
 - `projects.ts`: one entry per project. Each gets a card and a page at `/projects/<slug>/`. Set `featured: true` to show it on the home page, and `embedUrl` to embed a demo on its page.
+
+Blog posts are MDX files in `src/content/blog/`; the filename is the URL slug. Each one starts with its metadata:
+
+```mdx
+export const metadata = {
+  title: "Post title",
+  date: "2026-11-01",
+  summary: "One sentence for the list and link previews.",
+  tags: ["nextjs"],
+  draft: true, // optional: visible in `npm run dev`, left out of production builds
+};
+
+Markdown goes here. GFM tables, highlighted code blocks and the `<Callout>` and
+`<ProjectEmbed>` components from `src/mdx-components.tsx` all work.
+```
+
+Posts show up on `/blog/`, in the home page's "Latest writing" (newest three), in `sitemap.xml` and in the RSS feed at `/feed.xml`.
 
 Static files go in `public/`:
 

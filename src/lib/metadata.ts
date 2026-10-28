@@ -6,6 +6,8 @@ interface PageMetadataInput {
   description: string;
   /** Path of the page, e.g. "/projects/". */
   path: string;
+  /** Marks the page as an article (blog posts). */
+  article?: { publishedTime: string; tags?: string[] };
 }
 
 /**
@@ -16,6 +18,7 @@ export function pageMetadata({
   title,
   description,
   path,
+  article,
 }: PageMetadataInput): Metadata {
   const fullTitle = `${title} · ${site.name}`;
   const image = {
@@ -29,7 +32,13 @@ export function pageMetadata({
     title,
     description,
     openGraph: {
-      type: "website",
+      ...(article
+        ? {
+            type: "article" as const,
+            publishedTime: article.publishedTime,
+            tags: article.tags,
+          }
+        : { type: "website" as const }),
       url: path,
       siteName: site.name,
       title: fullTitle,
