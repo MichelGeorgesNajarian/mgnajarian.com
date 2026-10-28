@@ -42,7 +42,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.demoUrl && (
             <a
               href={project.demoUrl}
-              className="relative z-10 inline-flex items-center gap-1 text-primary hover:underline"
+              className="relative z-10 inline-flex items-center gap-1 text-link hover:underline"
             >
               {project.demoLabel ?? "Live demo"}
               <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
@@ -51,7 +51,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.repo && (
             <a
               href={project.repo}
-              className="relative z-10 inline-flex items-center gap-1 text-primary hover:underline"
+              className="relative z-10 inline-flex items-center gap-1 text-link hover:underline"
             >
               Source
               <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />

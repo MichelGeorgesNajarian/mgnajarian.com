@@ -85,7 +85,7 @@ export function ProjectEmbed({
         href={openUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+        className="inline-flex items-center gap-1 text-sm font-medium text-link hover:underline"
       >
         Open in new tab
         <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
