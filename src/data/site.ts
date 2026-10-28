@@ -6,12 +6,12 @@ export const site = {
     "I build customer-facing web platforms and the services behind them. Currently at Arctic Wolf.",
   /** Link-preview text (Open Graph / Twitter); shorter than `description`. */
   ogDescription:
-    "Full-stack software engineer in Montréal with 5+ years building customer-facing web platforms at Arctic Wolf and Nintex, in React, Angular, TypeScript and Go.",
+    "Full-stack software engineer in Montréal building customer-facing web platforms. React, Angular, TypeScript and Go.",
   ogImage: {
     path: "/images/og.jpg",
-    width: 3648,
-    height: 1689,
-    alt: "Michel Georges Najarian smiling in a selfie, lying on a wood floor next to a fluffy white dog",
+    width: 1200,
+    height: 630,
+    alt: "Michel Georges Najarian, Full-Stack Software Engineer. Smiling in a selfie next to a fluffy white dog.",
   },
   /** Résumé summary (shown on /resume/). */
   summary:
