@@ -9,7 +9,7 @@ export const metadata = {
 
 A friend asked me how I host this website. When I said GitHub Pages, they were surprised: "I thought you can only host static websites on GitHub." Then: "How is Next.js server side rendered on that?"
 
-I typed out a long answer in the chat, said "I could actually write a blog article about it", and here we are.
+I typed out a long answer in the chat, said "I could actually write a blog article about it", and here we are. I also got a couple of things wrong in that chat, so this is the corrected version.
 
 {/* Official Next.js logotype from https://vercel.com/geist/brands, unmodified, one variant per theme. */}
 
@@ -25,7 +25,7 @@ I typed out a long answer in the chat, said "I could actually write a blog artic
 
 </div>
 
-## GitHub Pages only serves static files
+## They were right
 
 GitHub Pages only serves static files: HTML, CSS, JavaScript, images. There is no server running your code when someone visits the page. You push files, GitHub hands them out. That's it.
 
@@ -40,6 +40,12 @@ Every web page ends up as the same three things: HTML, CSS and JavaScript. What 
 **Server-side rendering (SSR).** A server runs your code every time someone requests a page and sends back HTML that's already filled in. Because it runs per request, it can fetch fresh data, read cookies, check who's logged in, and so on. This is what most people mean by "Next.js is server rendered", and it needs a server. GitHub Pages doesn't have one.
 
 **Static site generation (SSG).** Next.js renders every page once, at build time, and writes the result to `.html` files. You get the same filled-in HTML as SSR, but the work happens on my machine or in CI, not on a server. This is what this site does.
+
+<Callout title="What I got wrong">
+  In the chat I explained the whole process, but mislabelled it as "server side
+  rendering". Nothing is rendered on a server when you visit this page. It's
+  pre-rendered at build time, which is static generation.
+</Callout>
 
 ## Turning Next.js into static files
 
@@ -164,7 +170,11 @@ JavaScript doesn't go away entirely, though. React still loads in the browser to
 
 Everything has to be known when the site is built. There are no per-request API calls on a server, no logins, no cookies read on the server. If a page needs fresh data, the browser has to fetch it with JavaScript after the page loads, the same way a client-rendered app would. For a personal site with a blog and a list of projects, that's fine. When I write a new post, I rebuild the site.
 
-You can still call an API while the site is being built, and the data gets baked into the HTML. What you can't do is call it again for each visitor.
+<Callout title="Also a correction">
+  In the chat I said you can't pre-render pages that expect API results. You
+  can, as long as the API is called at build time: the data gets baked into the
+  HTML. What you can't do is call it again for each visitor.
+</Callout>
 
 ## Getting the files onto GitHub Pages
 
