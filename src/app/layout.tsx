@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
 import { basePath } from "@/lib/base-path";
+import { PersonJsonLd } from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -67,6 +68,8 @@ export default function RootLayout({
       className={cn(geistSans.variable, geistMono.variable)}
     >
       <body className="bg-background text-foreground antialiased">
+        {/* Making sure SEO crawlers tie articles on this site to me */}
+        <PersonJsonLd />
         <ThemeProvider>
           <a
             href="#content"

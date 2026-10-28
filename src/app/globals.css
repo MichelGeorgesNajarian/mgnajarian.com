@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -138,4 +140,12 @@
 
 @page {
   margin: 1.5cm;
+}
+
+/* Code blocks (rehype-pretty-code, dual theme): each token carries both colours. */
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+}
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
 }
