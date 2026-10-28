@@ -12,6 +12,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { ProjectEmbed } from "@/components/project-embed";
 import { ProjectImage } from "@/components/project-image";
 import { Section } from "@/components/section";
+import { cn } from "@/lib/utils";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -51,7 +52,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <Section width="prose">
       <Link
         href="/projects/"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className={cn(
+          "inline-flex items-center gap-1 text-sm text-muted-foreground",
+          "transition-colors hover:text-foreground",
+        )}
       >
         <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4" />
         All projects
