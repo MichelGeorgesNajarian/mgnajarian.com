@@ -23,8 +23,10 @@ export async function GET() {
   const items = posts
     .map((post) => {
       const link = `${base}/blog/${post.slug}/`;
+      // whitespaces are to indent the XML nicely, but they are not required. The XML is still valid without them
       return `    <item>
       <title>${escapeXml(post.title)}</title>
+      <author>${escapeXml(`${site.email} (${site.name})`)}</author>
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate>
