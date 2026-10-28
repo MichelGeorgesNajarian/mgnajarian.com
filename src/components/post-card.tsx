@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Post } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export function PostCard({ post }: { post: Post }) {
   return (
@@ -14,7 +15,11 @@ export function PostCard({ post }: { post: Post }) {
         {/* Stretched link: the whole block opens the post. */}
         <Link
           href={`/blog/${post.slug}/`}
-          className="outline-none after:absolute after:-inset-3 after:rounded-lg focus-visible:after:ring-3 focus-visible:after:ring-ring/50"
+          className={cn(
+            "outline-none",
+            "after:absolute after:-inset-3 after:rounded-lg",
+            "focus-visible:after:ring-3 focus-visible:after:ring-ring/50",
+          )}
         >
           {post.title}
         </Link>

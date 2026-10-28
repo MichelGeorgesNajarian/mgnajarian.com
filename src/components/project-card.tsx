@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 /** Text-only on purpose: mixed image/no-image cards misalign their titles. Images live on the detail page. */
 export function ProjectCard({ project }: { project: Project }) {
@@ -21,7 +22,11 @@ export function ProjectCard({ project }: { project: Project }) {
           {/* Stretched link: the whole card opens the detail page. */}
           <Link
             href={`/projects/${project.slug}/`}
-            className="outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-3 focus-visible:after:ring-ring/50"
+            className={cn(
+              "outline-none",
+              "after:absolute after:inset-0 after:rounded-xl",
+              "focus-visible:after:ring-3 focus-visible:after:ring-ring/50",
+            )}
           >
             {project.title}
           </Link>
