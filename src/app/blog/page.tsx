@@ -7,7 +7,7 @@ import { Section } from "@/components/section";
 export const metadata = pageMetadata({
   title: "Blog",
   description:
-    "Notes on software engineering, web development and building this site.",
+    "Notes on software engineering, web development and random thoughts.",
   path: "/blog/",
 });
 
