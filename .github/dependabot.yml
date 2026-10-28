@@ -1,9 +1,11 @@
 # Weekly dependency update PRs. Security fixes are opened as soon as an alert
 # has a patched version (Settings → Code security → Dependabot security
-# updates) and use the same labels.
+# updates).
 #
-# Every PR into main needs a version label (see pr-labels.yml); dependency
-# bumps don't change what the site does, so they default to patch.
+# Every PR into main needs a version label (see pr-labels.yml). Dependabot
+# adds the repo's major/minor/patch label matching the size of the update
+# itself, so no labels are set here (they would be added on top of it). Swap
+# the label before merging if the site's version should bump differently.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -11,7 +13,6 @@ updates:
     schedule:
       interval: weekly
       day: monday
-    labels: ["patch"]
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 5
@@ -25,7 +26,6 @@ updates:
     schedule:
       interval: weekly
       day: monday
-    labels: ["patch"]
     commit-message:
       prefix: "chore(ci)"
     groups:
