@@ -1,0 +1,57 @@
+export const metadata = {
+  title: "Rebuilding my website with Next.js 16 and shadcn",
+  date: "2026-10-27",
+  summary:
+    "Why I replaced my single-page HTML site, and how the new one is built and deployed to GitHub Pages.",
+  tags: ["nextjs", "meta"],
+  draft: true,
+};
+
+<Callout title="Sample article">
+  This is a sample article that shows the components available for writing
+  posts, such as callouts, highlighted code blocks, images and project embeds.
+  It is a reference for future articles, so it stays in draft mode and will
+  never be published.
+</Callout>
+
+My old website was a single hand-written HTML page: a headshot, a few boxes for work experience, and three student projects. It no longer matched my résumé, so I rebuilt it.
+
+![The social preview image for the new site](/images/og.jpg)
+
+## The stack
+
+The site is a [Next.js](https://nextjs.org) app using the App Router, with [shadcn/ui](https://ui.shadcn.com) components on Tailwind CSS v4. It is exported as plain static files, so it can be hosted for free on GitHub Pages with my own domain and HTTPS.
+
+<Callout title="Static export">
+  There is no server. Every page, including each blog post, is rendered to HTML
+  at build time.
+</Callout>
+
+## Content lives in the repo
+
+My experience, skills, education and projects are typed data files, so the home page and the résumé page read from the same source. Posts like this one are MDX files, which means I can write Markdown and drop in React components when a post needs one.
+
+Code blocks are highlighted at build time, with no client-side JavaScript:
+
+```ts title="src/lib/posts.ts"
+export async function getPost(slug: string) {
+  return (await getAllPosts()).find((post) => post.slug === slug);
+}
+```
+
+## Embedding projects
+
+Posts can also embed a live demo. On desktop this is a lazy-loaded iframe, and on phones it collapses into a single button. Here is the demo of my university capstone project:
+
+<ProjectEmbed
+  embedUrl="https://www.youtube-nocookie.com/embed/t9sz5sh4ywE"
+  openUrl="https://www.youtube.com/watch?v=t9sz5sh4ywE"
+  title="OneRing capstone project demo"
+  openLabel="Watch demo"
+/>
+
+## Deploying
+
+Pull requests run lint, typecheck and build checks. Merging into the `develop` branch publishes a preview under `/develop`, and merging into `master` updates the live site. Both are built and published together, because GitHub Pages serves one site per repository.
+
+You can read the rest of the site on the [projects page](/projects/) or take a look at the [source on GitHub](https://github.com/MichelGeorgesNajarian/mgnajarian.com).

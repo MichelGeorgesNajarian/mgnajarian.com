@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Github01Icon, Linkedin01Icon } from "@hugeicons/core-free-icons";
 import { site } from "@/data/site";
@@ -28,12 +29,9 @@ export function Hero() {
             delay={0.2}
             className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start"
           >
-            <a
-              href={withBasePath(site.resumePdf)}
-              className={buttonVariants({ size: "lg" })}
-            >
+            <Link href="/resume/" className={buttonVariants({ size: "lg" })}>
               View résumé
-            </a>
+            </Link>
             <a
               href="#contact"
               className={buttonVariants({ size: "lg", variant: "outline" })}

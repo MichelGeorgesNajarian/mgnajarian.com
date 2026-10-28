@@ -13,3 +13,15 @@ export function formatMonth(value: string): string {
 export function formatRange(start: string, end?: string): string {
   return `${formatMonth(start)} – ${end ? formatMonth(end) : "Present"}`;
 }
+
+const fullDate = new Intl.DateTimeFormat("en-CA", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+/** "2026-10-27" -> "October 27, 2026" */
+export function formatDate(value: string): string {
+  return fullDate.format(new Date(`${value}T00:00:00Z`));
+}
