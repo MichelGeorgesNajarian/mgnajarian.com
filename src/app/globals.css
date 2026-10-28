@@ -131,6 +131,8 @@
   }
   html {
     @apply font-sans;
+    /* Reserve scrollbar space so short pages don't shift the layout. */
+    scrollbar-gutter: stable;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
