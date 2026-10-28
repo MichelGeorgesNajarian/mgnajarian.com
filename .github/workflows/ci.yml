@@ -1,11 +1,9 @@
-# Checks that every change must pass before merging into develop or master.
+# Checks that every change must pass before merging into main.
 name: CI
 
 on:
   pull_request:
-    branches: ["develop", "master"]
-  push:
-    branches: ["develop"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:

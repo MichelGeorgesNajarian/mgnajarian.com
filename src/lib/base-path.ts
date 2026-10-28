@@ -1,6 +1,6 @@
 /**
- * Sub-path the site is served from. Empty in production; "/develop" for the
- * develop preview (see next.config.ts).
+ * Sub-path the site is served from. Empty in production; "/preview" for the
+ * preview build (see next.config.ts).
  */
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 

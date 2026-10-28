@@ -1,0 +1,121 @@
+# Builds production and preview and publishes them together to GitHub Pages:
+#   production -> https://mgnajarian.com/          (a version tag)
+#   preview    -> https://mgnajarian.com/preview/  (usually main, noindex)
+#
+# GitHub Pages serves a single site per repo and every deploy replaces it, so
+# both halves are rebuilt on every deploy. What is live is recorded in the
+# deployed/production and deployed/preview tags; a caller that leaves a ref
+# empty keeps what is live there.
+#
+# Called by deploy-preview.yml and deploy-production.yml.
+name: Deploy to Pages
+
+on:
+  workflow_call:
+    inputs:
+      production-ref:
+        description: Ref to serve at / (empty keeps what is live)
+        type: string
+        default: ""
+      preview-ref:
+        description: Ref to serve at /preview (empty keeps what is live)
+        type: string
+        default: ""
+
+env:
+  HUSKY: "0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      production-sha: ${{ steps.shas.outputs.production }}
+      preview-sha: ${{ steps.shas.outputs.preview }}
+    steps:
+      - name: Checkout production
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.production-ref || 'refs/tags/deployed/production' }}
+          path: production
+      - name: Checkout preview
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.preview-ref || 'refs/tags/deployed/preview' }}
+          path: preview
+      - name: Record commits
+        id: shas
+        run: |
+          echo "production=$(git -C production rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "preview=$(git -C preview rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: preview/.nvmrc
+          cache: npm
+          cache-dependency-path: "*/package-lock.json"
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build production (served from /)
+        working-directory: production
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build preview (served from /preview)
+        working-directory: preview
+        env:
+          BASE_PATH: /preview
+        run: |
+          npm ci
+          npm run build
+
+      - name: Assemble site
+        run: |
+          mkdir -p site/preview
+          cp -a production/out/. site/
+          cp -a preview/out/. site/preview/
+          # CNAME only belongs at the root; _next/ must not be processed by Jekyll.
+          rm -f site/preview/CNAME site/preview/.nojekyll
+          touch site/.nojekyll
+          test -f site/index.html
+          test -f site/preview/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  record:
+    name: Record what is live
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    steps:
+      - name: Move deployed/* tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PRODUCTION_SHA: ${{ needs.build.outputs.production-sha }}
+          PREVIEW_SHA: ${{ needs.build.outputs.preview-sha }}
+        run: |
+          move() {
+            gh api -X PATCH "repos/$REPO/git/refs/tags/deployed/$1" -f sha="$2" -F force=true > /dev/null \
+              || gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/deployed/$1" -f sha="$2" > /dev/null
+          }
+          move production "$PRODUCTION_SHA"
+          move preview "$PREVIEW_SHA"
+          {
+            echo "production: $PRODUCTION_SHA"
+            echo "preview: $PREVIEW_SHA"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,28 @@
+# Every PR into main needs exactly one version label, which release.yml reads
+# after the merge to decide how to bump the version.
+name: PR labels
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  version-label:
+    name: Version label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require exactly one of patch, minor or major
+        env:
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          found=$(jq -r '.[] | select(. == "patch" or . == "minor" or . == "major")' <<<"$LABELS")
+          count=$(grep -c . <<<"$found" || true)
+          if [ "$count" -ne 1 ]; then
+            echo "::error::Add exactly one version label (patch, minor or major). Found: ${found:-none}"
+            exit 1
+          fi
+          echo "Version bump: $found"
