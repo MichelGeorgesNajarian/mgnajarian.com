@@ -4,6 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
 import { formatDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 import { getAllPosts, getPost } from "@/lib/posts";
 import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/section";
@@ -37,15 +38,19 @@ export async function generateMetadata({ params }: PostPageProps) {
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await getPost(slug);
-  if (!post) notFound();
-
+  if (!post) {
+    notFound();
+  }
   const { default: Content } = await import(`@/content/blog/${slug}.mdx`);
 
   return (
     <Section width="prose">
       <Link
         href="/blog/"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className={cn(
+          "inline-flex items-center gap-1 text-sm text-muted-foreground",
+          "transition-colors hover:text-foreground",
+        )}
       >
         <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4" />
         All posts
@@ -70,7 +75,15 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
       </header>
 
-      <article className="prose dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-link prose-pre:border prose-pre:bg-muted prose-pre:text-foreground mt-10 max-w-none [&_:is(h1,h2,h3,h4)_a]:text-inherit [&_:is(h1,h2,h3,h4)_a]:no-underline">
+      <article
+        className={cn(
+          "prose dark:prose-invert mt-10 max-w-none",
+          "prose-headings:scroll-mt-24",
+          "prose-a:text-link [&_a]:no-underline [&_a:hover]:underline",
+          "[&_:is(h1,h2,h3,h4)_a]:text-inherit",
+          "prose-pre:border prose-pre:bg-muted prose-pre:text-foreground",
+        )}
+      >
         <Content />
       </article>
     </Section>

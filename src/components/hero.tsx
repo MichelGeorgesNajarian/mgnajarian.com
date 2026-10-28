@@ -7,6 +7,7 @@ import { withBasePath } from "@/lib/base-path";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
@@ -65,7 +66,10 @@ export function Hero() {
           width={640}
           height={640}
           priority
-          className="size-48 shrink-0 rounded-full object-cover ring-1 ring-foreground/10 sm:size-56 md:size-64"
+          className={cn(
+            "size-48 shrink-0 rounded-full object-cover sm:size-56 md:size-64",
+            "ring-1 ring-foreground/10",
+          )}
         />
       </div>
     </Section>

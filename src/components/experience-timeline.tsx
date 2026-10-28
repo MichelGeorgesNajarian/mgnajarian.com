@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
+import { cn } from "@/lib/utils";
 
 export function ExperienceTimeline() {
   return (
@@ -15,7 +16,10 @@ export function ExperienceTimeline() {
           <li key={job.company} className="relative">
             <span
               aria-hidden
-              className="absolute top-2 -left-7.25 size-2.5 rounded-full bg-primary ring-4 ring-background sm:-left-9.25"
+              className={cn(
+                "absolute top-2 -left-7.25 sm:-left-9.25",
+                "size-2.5 rounded-full bg-primary ring-4 ring-background",
+              )}
             />
             <Reveal>
               <h3 className="text-xl font-semibold">{job.company}</h3>
