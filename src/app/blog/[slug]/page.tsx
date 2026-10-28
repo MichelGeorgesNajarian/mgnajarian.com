@@ -70,7 +70,7 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
       </header>
 
-      <article className="prose dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-primary prose-pre:border prose-pre:bg-muted prose-pre:text-foreground mt-10 max-w-none [&_:is(h1,h2,h3,h4)_a]:text-inherit [&_:is(h1,h2,h3,h4)_a]:no-underline">
+      <article className="prose dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-link prose-pre:border prose-pre:bg-muted prose-pre:text-foreground mt-10 max-w-none [&_:is(h1,h2,h3,h4)_a]:text-inherit [&_:is(h1,h2,h3,h4)_a]:no-underline">
         <Content />
       </article>
     </Section>
