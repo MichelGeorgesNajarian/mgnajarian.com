@@ -1,0 +1,32 @@
+# Publishes main to https://mgnajarian.com/preview/ after every merge, keeping
+# whatever production version is live. Can also be run by hand, optionally
+# for another branch, tag or commit.
+name: Deploy preview
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, tag or commit to preview
+        type: string
+        default: main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Shared with deploy-production.yml: one Pages deploy at a time, and an
+# in-progress deploy is never cancelled.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.actor == github.repository_owner
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      preview-ref: ${{ inputs.ref || github.sha }}

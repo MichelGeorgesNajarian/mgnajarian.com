@@ -70,16 +70,24 @@ Static files go in `public/`:
 
 ## Branches and deployment
 
-`develop` is the default branch. Open pull requests into `develop`; when it's ready, open a single PR from `develop` into `master`.
+`main` is the only long-lived branch. Open pull requests into `main`; they are squash-merged, so each PR lands as a single commit.
 
-- **CI** (`.github/workflows/ci.yml`): lint, typecheck and build run as separate jobs on pull requests into `develop` or `master`, and on pushes to `develop`.
-- **Deploy** (`.github/workflows/deploy-site.yml`): a push to `master` or `develop` builds both branches and publishes them together, because GitHub Pages serves one site per repo:
-  - `master` is served at <https://mgnajarian.com/> (production)
-  - `develop` is served at <https://mgnajarian.com/develop/> (preview, `noindex`)
+Every PR needs exactly one version label: `patch` (fixes, chores, refactors), `minor` (new features) or `major` (breaking changes). Merging tags the squash commit with the next version, e.g. from `v1.2.3`: `patch` → `v1.2.4`, `minor` → `v1.3.0`, `major` → `v2.0.0`.
 
-The `develop` build sets `BASE_PATH=/develop` (read in `next.config.ts`). `next/link` and built assets handle the prefix automatically, but anything in `public/` that is referenced by a plain path needs `withBasePath()` from `src/lib/base-path.ts`.
+- **CI** (`.github/workflows/ci.yml`): lint, typecheck and build run as separate jobs on pull requests into `main`.
+- **PR labels** (`.github/workflows/pr-labels.yml`): the "Version label" check fails unless the PR has exactly one version label.
+- **Release** (`.github/workflows/release.yml`): tags each merged PR with the next version.
+- **Deploy preview** (`.github/workflows/deploy-preview.yml`): every merge publishes `main` to <https://mgnajarian.com/preview/> (`noindex`). It can also be run by hand from the Actions tab, optionally for another branch, tag or commit.
+- **Deploy production** (`.github/workflows/deploy-production.yml`): run by hand from the Actions tab with a version tag (or `latest`) to publish it to <https://mgnajarian.com/>. To roll back, run it with an older version.
+
+GitHub Pages serves one site per repo and every deploy replaces it, so both deploy workflows go through `.github/workflows/deploy-pages.yml`, which rebuilds production and preview together. The `deployed/production` and `deployed/preview` tags record what is currently live, and each deploy keeps the half it isn't changing. Only one Pages deploy runs at a time; if a queued deploy shows as cancelled because another was queued behind it, run it again.
+
+The preview build sets `BASE_PATH=/preview` (read in `next.config.ts`). `next/link` and built assets handle the prefix automatically, but anything in `public/` that is referenced by a plain path needs `withBasePath()` from `src/lib/base-path.ts`.
 
 Repo settings this relies on:
 
+- Settings → General: only squash merging is allowed (PR title and description as the commit message).
+- Settings → Rules: `main` requires a PR and the Lint, Typecheck, Build and Version label checks; `v*` tags can't be moved or deleted.
 - Settings → Pages: source is **GitHub Actions**, custom domain `mgnajarian.com`, HTTPS enforced.
-- Settings → Environments → `github-pages`: deployment branches include both `develop` and `master`.
+- Settings → Environments → `github-pages`: deployment branches are limited to `main`.
+- Settings → Actions: the default workflow token is read-only, and workflows from outside contributors need approval. Deploy workflows only run for the repo owner.

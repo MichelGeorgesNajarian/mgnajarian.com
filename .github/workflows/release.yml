@@ -1,0 +1,52 @@
+# Tags the squash commit of every PR merged into main with the next version,
+# bumped by the PR's version label (see pr-labels.yml):
+#   patch v1.2.3 -> v1.2.4, minor -> v1.3.0, major -> v2.0.0
+#
+# pull_request_target runs this file from main, not from the PR, and nothing
+# from the PR is checked out, so it is safe to give it write access.
+name: Release
+
+on:
+  pull_request_target:
+    branches: ["main"]
+    types: [closed]
+
+permissions:
+  contents: write
+
+# Two merges in a row must not read the same "latest" tag.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    name: Tag release
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create version tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          bump=$(jq -r '[.[] | select(. == "patch" or . == "minor" or . == "major")] | if length == 1 then .[0] else "" end' <<<"$LABELS")
+          if [ -z "$bump" ]; then
+            echo "::error::PR needs exactly one of patch, minor or major; no tag created."
+            exit 1
+          fi
+
+          latest=$(gh api "repos/$REPO/git/matching-refs/tags/v" --paginate --jq '.[].ref | ltrimstr("refs/tags/")' \
+            | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1)
+          IFS=. read -r major minor patch <<<"${latest#v}"
+          case "$bump" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+          esac
+          next="v$major.$minor.$patch"
+
+          gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/$next" -f sha="$SHA" > /dev/null
+          echo "Tagged $SHA as $next ($bump bump from $latest)" | tee -a "$GITHUB_STEP_SUMMARY"

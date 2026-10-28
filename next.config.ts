@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
-// Set only for the develop preview build, which is served from /develop.
-// Production (master) is served from the domain root and leaves this unset.
+// Set only for the preview build, which is served from /preview.
+// Production is served from the domain root and leaves this unset.
 const basePath = process.env.BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {

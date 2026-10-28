@@ -27,10 +27,10 @@ export const projects: Project[] = [
     slug: "mgnajarian-com",
     title: "This website",
     summary:
-      "My personal site: a statically exported Next.js app with shadcn/ui and Tailwind CSS, deployed to GitHub Pages with a preview of the develop branch.",
+      "My personal site: a statically exported Next.js app with shadcn/ui and Tailwind CSS, deployed to GitHub Pages with a preview of the latest changes.",
     description: [
       "This is the site you're on: a Next.js app using the App Router, statically exported and hosted on GitHub Pages. The UI is built from shadcn/ui components on Tailwind CSS, with light and dark themes.",
-      "Résumé content lives in typed data files, so a change to my experience or projects is a single edit. Pull requests run lint, typecheck and build checks, and merging to the develop branch publishes a preview under /develop while master serves production.",
+      "Résumé content lives in typed data files, so a change to my experience or projects is a single edit. Pull requests run lint, typecheck and build checks, merging to main publishes a preview under /preview and tags a semantic version, and production is deployed from a chosen version tag.",
     ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
     repo: "https://github.com/MichelGeorgesNajarian/mgnajarian.com",
