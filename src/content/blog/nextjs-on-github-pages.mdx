@@ -1,0 +1,194 @@
+export const metadata = {
+  title: "How a Next.js site runs on GitHub Pages",
+  date: "2026-10-28",
+  summary:
+    "GitHub Pages only serves static files, so how does a Next.js site end up there? A short tour of client rendering, server rendering and static generation, using this website as the example.",
+  tags: ["nextjs", "github-pages", "meta"],
+  draft: true,
+};
+
+A friend asked me how I host this website. When I said GitHub Pages, they were surprised: "I thought you can only host static websites on GitHub." Then: "How is Next.js server side rendered on that?"
+
+I typed out a long answer in the chat, said "I could actually write a blog article about it", and here we are. I also got a couple of things wrong in that chat, so this is the corrected version.
+
+{/* Official Next.js logotype from https://vercel.com/geist/brands, unmodified, one variant per theme. */}
+
+<div className="not-prose my-8 flex justify-center rounded-lg border p-8 dark:hidden [&_img]:rounded-none [&_img]:border-0">
+
+![Next.js logo](/images/blog/nextjs-logotype-black.svg)
+
+</div>
+
+<div className="not-prose my-8 hidden justify-center rounded-lg border p-8 dark:flex [&_img]:rounded-none [&_img]:border-0">
+
+![Next.js logo](/images/blog/nextjs-logotype-white.svg)
+
+</div>
+
+## They were right
+
+GitHub Pages only serves static files: HTML, CSS, JavaScript, images. There is no server running your code when someone visits the page. You push files, GitHub hands them out. That's it.
+
+So a Next.js site on GitHub Pages is a static website. The trick is that Next.js can produce one.
+
+## Three ways to get HTML into a browser
+
+Every web page ends up as the same three things: HTML, CSS and JavaScript. What changes is _when_ the HTML gets filled in.
+
+**Client-side rendering.** This is a regular React or Angular app. The server sends an almost empty HTML file: a `<head>` that imports the styles and scripts, and a single `<div id="root">` in the body. The browser downloads the JavaScript, runs it, and the JavaScript builds the page inside that div. Until it does, there's nothing to see.
+
+**Server-side rendering (SSR).** A server runs your code every time someone requests a page and sends back HTML that's already filled in. Because it runs per request, it can fetch fresh data, read cookies, check who's logged in, and so on. This is what most people mean by "Next.js is server rendered", and it needs a server. GitHub Pages doesn't have one.
+
+**Static site generation (SSG).** Next.js renders every page once, at build time, and writes the result to `.html` files. You get the same filled-in HTML as SSR, but the work happens on my machine or in CI, not on a server. This is what this site does.
+
+<Callout title="What I got wrong">
+  In the chat I explained the whole process, but mislabelled it as "server side
+  rendering". Nothing is rendered on a server when you visit this page. It's
+  pre-rendered at build time, which is static generation.
+</Callout>
+
+## Turning Next.js into static files
+
+It takes one line in `next.config.ts`:
+
+```ts title="next.config.ts"
+const nextConfig: NextConfig = {
+  output: "export",
+  // /blog/foo/ -> blog/foo/index.html (GitHub Pages friendly)
+  trailingSlash: true,
+  // No image optimization server on GitHub Pages
+  images: { unoptimized: true },
+};
+```
+
+With `output: "export"`, `next build` writes a plain folder called `out/` that any static host can serve. The other two options are there because GitHub Pages can't do what a Next.js server would normally do: resize images on the fly, or map `/blog/foo` to the right file.
+
+The catch is that Next.js now needs to know every page that exists, at build time.
+
+## Telling the build which pages exist
+
+A blog post's URL is `/blog/<slug>/`, but I don't have a folder per post. There's one route, `src/app/blog/[slug]/page.tsx`, and the `[slug]` part is filled in for each post. On a server, Next.js would do that whenever someone asked for a post. For a static export, I have to hand it the full list up front:
+
+```tsx title="src/app/blog/[slug]/page.tsx"
+// Required by `output: "export"`: only the slugs below exist.
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return (await getAllPosts()).map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: PostPageProps) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  // ...title, description and social preview for this post
+}
+```
+
+`generateStaticParams` returns one entry per post, and the build renders the page once for each. `generateMetadata` does the same for the `<title>`, description and link previews. Projects work the same way: there is a single `src/app/projects/[slug]/page.tsx`, and the list comes from a typed data file, `src/data/projects.ts`.
+
+After `npm run build`, the output looks like this:
+
+```txt title="out/"
+out/
+├── index.html
+├── blog/
+│   ├── index.html
+│   └── nextjs-on-github-pages/
+│       └── index.html
+├── projects/
+│   ├── index.html
+│   ├── mgnajarian-com/
+│   │   └── index.html
+│   └── fitness-smart-ring/
+│       └── index.html
+└── _next/
+    └── static/...
+```
+
+None of those project folders exist in my source code. They're generated from the data. When you visit `/projects/`, GitHub Pages serves `projects/index.html`, and that file already contains the whole page, not an empty `<div>` waiting for JavaScript.
+
+Here's the difference, side by side. This is everything a freshly built React app made with Vite sends to the browser:
+
+```html title="dist/index.html (client-side rendering)"
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vite + React</title>
+    <script type="module" src="/assets/index-Bx3k9.js"></script>
+    <link rel="stylesheet" href="/assets/index-Dk2l8.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+And this is a trimmed excerpt of `projects/index.html` on this site, with the styling classes and most of the tags removed:
+
+```html title="out/projects/index.html (static generation, trimmed)"
+<head>
+  <title>Projects · Michel Georges Najarian</title>
+  <meta
+    name="description"
+    content="Things I've built: a capstone smart ring, ..."
+  />
+  <meta property="og:image" content="https://mgnajarian.com/images/og.jpg" />
+  <script src="/_next/static/chunks/..." async></script>
+</head>
+<body>
+  <main id="content">
+    <h1>Projects</h1>
+    <ul>
+      <li>
+        <a href="/projects/mgnajarian-com/">This website</a>
+        <div>My personal site: a statically exported Next.js app ...</div>
+      </li>
+      <li>
+        <a href="/projects/fitness-smart-ring/"
+          >OneRing: Fitness Tracking Smart Ring</a
+        >
+        <div>Our University of Waterloo ECE capstone: a smart ring ...</div>
+      </li>
+      <!-- ...and the other three projects -->
+    </ul>
+  </main>
+</body>
+```
+
+The titles, descriptions and links are all there before a single line of JavaScript runs.
+
+## Why bother
+
+- **Free hosting.** Static files on GitHub Pages cost nothing, with a custom domain and HTTPS.
+- **Better for search engines and link previews.** A crawler that doesn't run JavaScript still sees the full content and the right metadata, instead of an empty shell.
+- **Fast first paint.** The content is in the HTML, so it shows up before any JavaScript runs.
+
+JavaScript doesn't go away entirely, though. React still loads in the browser to make the interactive parts work, like the theme toggle. That step is called hydration. It just isn't needed to see the content.
+
+## What you give up
+
+Everything has to be known when the site is built. There are no per-request API calls on a server, no logins, no cookies read on the server. If a page needs fresh data, the browser has to fetch it with JavaScript after the page loads, the same way a client-rendered app would. For a personal site with a blog and a list of projects, that's fine. When I write a new post, I rebuild the site.
+
+<Callout title="Also a correction">
+  In the chat I said you can't pre-render pages that expect API results. You
+  can, as long as the API is called at build time: the data gets baked into the
+  HTML. What you can't do is call it again for each visitor.
+</Callout>
+
+## Getting the files onto GitHub Pages
+
+There are two common ways to publish.
+
+1. **Publish from a branch.** An npm package like `gh-pages` builds the site and commits the output to a separate branch, which GitHub Pages serves. It works, but it puts compiled files in your repository's history, which I don't like.
+2. **Publish with GitHub Actions.** In the repository settings, set the Pages source to "GitHub Actions". A workflow builds the site and uploads `out/` as an artifact, and nothing compiled is ever committed.
+
+This site uses the second option. Every merge into `main` publishes a preview under `/preview/`, and production is deployed by hand from a version tag. The [source is on GitHub](https://github.com/MichelGeorgesNajarian/mgnajarian.com) if you want to see the workflows, and the [projects page](/projects/) is a good example of statically generated pages.
+
+---
+
+<small>
+  Vercel, the Vercel design, Next.js and related marks, designs and logos are
+  trademarks or registered trademarks of Vercel, Inc. or its affiliates in the
+  US and other countries.
+</small>
