@@ -4,8 +4,9 @@
 #
 # Every PR into main needs a version label (see pr-labels.yml). Dependabot
 # adds the repo's major/minor/patch label matching the size of the update
-# itself, so no labels are set here (they would be added on top of it). Swap
-# the label before merging if the site's version should bump differently.
+# itself, so no version label is set here (it would be added on top of it).
+# Swap the label before merging if the site's version should bump
+# differently. "dependencies" is added alongside it; pr-labels.yml ignores it.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -13,6 +14,7 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    labels: ["dependencies"]
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 5
@@ -26,6 +28,7 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    labels: ["dependencies"]
     commit-message:
       prefix: "chore(ci)"
     groups:
