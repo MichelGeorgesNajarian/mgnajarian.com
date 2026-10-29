@@ -40,6 +40,8 @@ Every web page ends up as the same three things: HTML, CSS and JavaScript. What 
 
 **Static site generation (SSG).** Next.js renders every page once, at build time, and writes the result to `.html` files. You get the same filled-in HTML as SSR, but the work happens on my machine or in CI, not on a server. This is what this site does.
 
+So which of the three work on GitHub Pages? Two of them. Client-side rendering and static generation both end up as plain files, so GitHub Pages can serve either. A Vite React app on GitHub Pages is client-rendered, and it works fine. Server-side rendering is the only one that doesn't, because it needs a server to run code on every request. I'm using static generation here because it gives visitors and search engines real content in the HTML, instead of an empty shell.
+
 <Callout title="What I got wrong">
   In the chat I explained the whole process, but mislabelled it as "server side
   rendering". Nothing is rendered on a server when you visit this page. It's
