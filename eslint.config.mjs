@@ -24,7 +24,11 @@ export default [
     ignores: ["dist/**/*"],
     settings: {
       react: {
-        version: "detect",
+        // eslint-plugin-react 7.37.5 doesn't support ESLint 10 yet: "detect"
+        // calls context.getFilename(), which ESLint 10 removed. Restore
+        // "detect" once the plugin adds ESLint 10 support.
+        // version: "detect",
+        version: "19.3",
       },
     },
   },

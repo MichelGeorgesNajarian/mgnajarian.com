@@ -28,6 +28,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - run: npm i # this will catche errors that aren't always caught when running npm ci
       - run: npm ci
       - run: npm run lint
 
