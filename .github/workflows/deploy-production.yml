@@ -51,3 +51,5 @@ jobs:
     uses: ./.github/workflows/deploy-pages.yml
     with:
       production-ref: ${{ needs.resolve.outputs.tag }}
+    secrets:
+      deploy-tag-token: ${{ secrets.DEPLOY_TAG_TOKEN }}
