@@ -122,7 +122,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             openUrl={openUrl}
             title={`${project.title}: ${project.demoLabel ?? "demo"}`}
             openLabel={project.demoLabel}
-            aspectRatio={project.embedAspectRatio}
             showIframeOnMobile={project.showIframeOnMobile}
           />
         </div>

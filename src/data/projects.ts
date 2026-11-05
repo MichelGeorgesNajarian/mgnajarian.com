@@ -13,8 +13,6 @@ export interface Project {
   demoLabel?: string;
   /** Iframe-able URL for the detail page (e.g. a YouTube /embed/ link or a GH Pages demo you control). */
   embedUrl?: string;
-  /** CSS aspect-ratio for the embed frame; defaults to "16 / 9". Use a taller ratio for apps that need vertical room. */
-  embedAspectRatio?: string;
   /**
    * If true, the iframe will be shown on mobile instead of a single button. This is only useful for demos that are mobile-friendly and light enough to load on phones.
    * Otherwise, the default is to show a single button that opens the demo in a new tab.
@@ -90,9 +88,6 @@ export const projects: Project[] = [
     demoUrl: "https://michelgeorgesnajarian.github.io/online-piano/",
     demoLabel: "Play online",
     embedUrl: "https://michelgeorgesnajarian.github.io/online-piano/",
-    // The page stacks the piano above a 12-line key-mapping list in a 100vh
-    // column, so a 16:9 frame squashes the piano. Square gives both room.
-    embedAspectRatio: "1 / 1",
     showIframeOnMobile: true,
     repo: "https://github.com/MichelGeorgesNajarian/online-piano",
     featured: false,

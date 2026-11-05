@@ -32,8 +32,6 @@ interface ProjectEmbedProps {
   title: string;
   /** Button label on mobile, e.g. "Watch demo". */
   openLabel?: string;
-  /** CSS aspect-ratio of the frame, e.g. "1 / 1" for apps taller than video. Defaults to 16 / 9. */
-  aspectRatio?: string;
   /**
    * If true, the iframe will be shown on mobile instead of a single button. This is only useful for demos that are mobile-friendly and light enough to load on phones.
    * Otherwise, the default is to show a single button that opens the demo in a new tab.
@@ -50,7 +48,6 @@ export function ProjectEmbed({
   openUrl,
   title,
   openLabel = "Open demo",
-  aspectRatio = "16 / 9",
   showIframeOnMobile = false,
 }: ProjectEmbedProps) {
   const isDesktop = useIsDesktop();
@@ -72,10 +69,7 @@ export function ProjectEmbed({
 
   return (
     <div className="space-y-3">
-      <div
-        className="relative overflow-hidden rounded-xl border bg-muted"
-        style={{ aspectRatio }}
-      >
+      <div className="relative aspect-video overflow-hidden rounded-xl border bg-muted">
         {!loaded && (
           <div
             aria-hidden
