@@ -19,6 +19,18 @@ env:
   HUSKY: "0"
 
 jobs:
+  install:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm i # this will catch errors that aren't always caught when running npm ci
+      - run: npm ci
+      - run: npm run lint
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -28,7 +40,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm i # this will catche errors that aren't always caught when running npm ci
       - run: npm ci
       - run: npm run lint
 
