@@ -50,6 +50,14 @@ Posts can also embed a live demo. On desktop this is a lazy-loaded iframe, and o
   openLabel="Watch demo"
 />
 
+Images can also be hidden behind a blur until the reader chooses to reveal them:
+
+<RevealImage className="rounded-lg overflow-hidden">
+
+![The OneRing capstone project](/images/onering.webp)
+
+</RevealImage>
+
 ## Deploying
 
 Pull requests run lint, typecheck and build checks. Merging into the `develop` branch publishes a preview under `/develop`, and merging into `master` updates the live site. Both are built and published together, because GitHub Pages serves one site per repository.
