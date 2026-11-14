@@ -13,6 +13,11 @@ export interface Project {
   demoLabel?: string;
   /** Iframe-able URL for the detail page (e.g. a YouTube /embed/ link or a GH Pages demo you control). */
   embedUrl?: string;
+  /**
+   * If true, the iframe will be shown on mobile instead of a single button. This is only useful for demos that are mobile-friendly and light enough to load on phones.
+   * Otherwise, the default is to show a single button that opens the demo in a new tab.
+   * */
+  showIframeOnMobile?: boolean;
   /** Path under /public, e.g. "/images/projects/foo.webp" */
   image?: string;
   /** Describe informative images; leave unset for decorative ones. */
@@ -68,6 +73,24 @@ export const projects: Project[] = [
     tags: ["Java", "Maven", "TMDb API"],
     repo: "https://github.com/MichelGeorgesNajarian/BeautifyTvShowDirectory",
     featured: true,
+  },
+  {
+    slug: "online-piano",
+    title: "Online Piano",
+    summary:
+      "A one-octave piano (C to B, including sharps) built with plain HTML, CSS and JavaScript. Play it by clicking the keys or with your computer keyboard.",
+    description: [
+      `This project is a practice run of a sample front-end interview question I found online: "Build a playable piano in the browser using only vanilla HTML, CSS and JavaScript."
+      The question forbids frameworks, libraries and build tools, so it tests DOM layout, event handling and a bit of state management with nothing to lean on.`,
+      "Some notes: this project was completed in a very limited timeframe and therefore isn't as polished as it could be. The piano is only one octave, and the keys are a bit small on mobile. The audio is generated with the the JS Audio API without preloading any of the sound files, so the first note played may be delayed while the browser fetches the audio.",
+    ],
+    tags: ["HTML", "CSS", "JavaScript"],
+    demoUrl: "https://michelgeorgesnajarian.github.io/online-piano/",
+    demoLabel: "Play online",
+    embedUrl: "https://michelgeorgesnajarian.github.io/online-piano/",
+    showIframeOnMobile: true,
+    repo: "https://github.com/MichelGeorgesNajarian/online-piano",
+    featured: false,
   },
   {
     slug: "changemaker",

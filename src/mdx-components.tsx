@@ -3,6 +3,7 @@ import Link from "next/link";
 import { withBasePath } from "@/lib/base-path";
 import { Callout } from "@/components/callout";
 import { ProjectEmbed } from "@/components/project-embed";
+import { RevealImage } from "@/components/reveal-image";
 
 /**
  * Elements and components available inside .mdx files. Required by @next/mdx
@@ -46,6 +47,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     Callout,
     ProjectEmbed,
+    RevealImage,
     ...components,
   };
 }

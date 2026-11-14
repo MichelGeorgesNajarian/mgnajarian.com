@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
-import { basePath } from "@/lib/base-path";
+import { basePath, withBasePath } from "@/lib/base-path";
 import { PersonJsonLd } from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
@@ -30,6 +30,22 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  icons: {
+    icon: [
+      { url: withBasePath("/favicon.ico"), sizes: "any" },
+      {
+        url: withBasePath("/favicon-16x16.png"),
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: withBasePath("/favicon-32x32.png"),
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    apple: { url: withBasePath("/apple-touch-icon.png"), sizes: "180x180" },
+  },
   alternates: {
     types: { "application/rss+xml": "/feed.xml" },
   },

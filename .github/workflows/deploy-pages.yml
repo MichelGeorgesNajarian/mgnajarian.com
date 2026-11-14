@@ -7,6 +7,9 @@
 # deployed/production and deployed/preview tags; a caller that leaves a ref
 # empty keeps what is live there.
 #
+# Moving those tags needs a token with the Workflows permission, passed in as
+# the deploy-tag-token secret (see the record job for why GITHUB_TOKEN can't).
+#
 # Called by deploy-preview.yml and deploy-production.yml.
 name: Deploy to Pages
 
@@ -21,6 +24,12 @@ on:
         description: Ref to serve at /preview (empty keeps what is live)
         type: string
         default: ""
+    secrets:
+      deploy-tag-token:
+        description: >-
+          Fine-grained token for this repo with Contents and Workflows
+          read/write, used only to move the deployed/* tags.
+        required: true
 
 env:
   HUSKY: "0"
@@ -33,12 +42,12 @@ jobs:
       preview-sha: ${{ steps.shas.outputs.preview }}
     steps:
       - name: Checkout production
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.production-ref || 'refs/tags/deployed/production' }}
           path: production
       - name: Checkout preview
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.preview-ref || 'refs/tags/deployed/preview' }}
           path: preview
@@ -48,13 +57,13 @@ jobs:
           echo "production=$(git -C production rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "preview=$(git -C preview rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: preview/.nvmrc
           cache: npm
           cache-dependency-path: "*/package-lock.json"
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Build production (served from /)
         working-directory: production
@@ -82,7 +91,7 @@ jobs:
           test -f site/preview/index.html
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./site
 
@@ -95,20 +104,30 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   record:
     name: Record what is live
     runs-on: ubuntu-latest
     needs: [build, deploy]
     steps:
+      # Why not github.token: GitHub refuses to let GITHUB_TOKEN point a ref
+      # at a commit whose .github/workflows/ files differ from the default
+      # branch tip; that needs the Workflows permission, which GITHUB_TOKEN
+      # can never have. Every deploy leaves one tag on an older commit, so
+      # after any workflow change (e.g. a CI tweak) the step would fail with
+      # 403 "Resource not accessible by integration".
       - name: Move deployed/* tags
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.deploy-tag-token }}
           REPO: ${{ github.repository }}
           PRODUCTION_SHA: ${{ needs.build.outputs.production-sha }}
           PREVIEW_SHA: ${{ needs.build.outputs.preview-sha }}
         run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::The DEPLOY_TAG_TOKEN repo secret is missing or empty."
+            exit 1
+          fi
           move() {
             gh api -X PATCH "repos/$REPO/git/refs/tags/deployed/$1" -f sha="$2" -F force=true > /dev/null \
               || gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/deployed/$1" -f sha="$2" > /dev/null

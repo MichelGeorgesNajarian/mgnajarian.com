@@ -42,7 +42,10 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
-  if (!project) notFound();
+  if (!project) {
+    notFound();
+    return;
+  }
 
   const openUrl = project.demoUrl ?? project.embedUrl;
   // An embedded demo has its own section below, so don't repeat it up here.
@@ -119,6 +122,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             openUrl={openUrl}
             title={`${project.title}: ${project.demoLabel ?? "demo"}`}
             openLabel={project.demoLabel}
+            showIframeOnMobile={project.showIframeOnMobile}
           />
         </div>
       )}
