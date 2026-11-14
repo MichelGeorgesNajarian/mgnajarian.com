@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "serve out",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
@@ -61,6 +61,7 @@
     "husky": "^9.1.7",
     "postcss": "8.5.32",
     "prettier": "3.9.10",
+    "serve": "^14.2.8",
     "tailwindcss": "^4",
     "typescript": "^6",
     "typescript-eslint": "^8.72.0"
