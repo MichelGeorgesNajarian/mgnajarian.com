@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@next/eslint-plugin-next": "^16.4.3",
+    "@next/eslint-plugin-next": "^16.4.6",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
     "@types/mdx": "^2.0.14",
@@ -60,7 +60,7 @@
     "globals": "^17.14.0",
     "husky": "^9.1.7",
     "postcss": "8.5.32",
-    "prettier": "3.9.10",
+    "prettier": "3.10.1",
     "serve": "^14.2.8",
     "tailwindcss": "^4",
     "typescript": "^6",
